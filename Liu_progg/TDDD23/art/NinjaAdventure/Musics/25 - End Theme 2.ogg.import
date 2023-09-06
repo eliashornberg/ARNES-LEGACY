@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://qeoke2fn4s66"
+path="res://.godot/imported/25 - End Theme 2.ogg-b488410ca1f2d436410535a7f44224fa.oggvorbisstr"
+
+[deps]
+
+source_file="res://art/NinjaAdventure/Musics/25 - End Theme 2.ogg"
+dest_files=["res://.godot/imported/25 - End Theme 2.ogg-b488410ca1f2d436410535a7f44224fa.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
