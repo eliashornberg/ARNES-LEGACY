@@ -12,8 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://b6nyq5p6hy7ju" path="res://art/NinjaAdventure/Backgrounds/Vehicles/Boat.png" id="7_2cpvg"]
 [ext_resource type="Texture2D" uid="uid://wk26y8amcx2t" path="res://art/NinjaAdventure/Backgrounds/Tilesets/TilesetElement.png" id="7_kl3e5"]
 [ext_resource type="Texture2D" uid="uid://cruj8balguhx6" path="res://art/NinjaAdventure/Backgrounds/Tilesets/TilesetFloorDetail.png" id="9_lrw0s"]
-[ext_resource type="PackedScene" uid="uid://bg0tywlw6eemh" path="res://spinner.tscn" id="13_8eema"]
 [ext_resource type="PackedScene" uid="uid://dd4tm25k5nqty" path="res://flag.tscn" id="14_bgbhn"]
+[ext_resource type="PackedScene" uid="uid://x3tohfiet0f4" path="res://enemy.tscn" id="15_5q6ys"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lafp8"]
 texture = ExtResource("2_byblk")
@@ -6886,14 +6886,6 @@ layer_2/tile_data = PackedInt32Array(983100, 1114127, 16, 983101, 1179663, 16, 9
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(100, 100)
 
-[node name="spinner" parent="." instance=ExtResource("13_8eema")]
-z_index = -1
-position = Vector2(350, 150)
-
-[node name="spinner2" parent="." instance=ExtResource("13_8eema")]
-z_index = -1
-position = Vector2(200, 250)
-
 [node name="Flag" parent="." instance=ExtResource("14_bgbhn")]
 z_index = 3
 position = Vector2(-115.167, 220)
@@ -6905,3 +6897,6 @@ position = Vector2(443.833, -84.8333)
 [node name="Flag3" parent="." instance=ExtResource("14_bgbhn")]
 z_index = 3
 position = Vector2(-115.5, 619)
+
+[node name="enemy" parent="." instance=ExtResource("15_5q6ys")]
+position = Vector2(275.333, 299.333)
