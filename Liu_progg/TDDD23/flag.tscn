@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://dd4tm25k5nqty"]
+
+[ext_resource type="Script" path="res://flag.gd" id="1_4pyiu"]
+[ext_resource type="Texture2D" uid="uid://dxygd6f2qaayu" path="res://art/NinjaAdventure/Backgrounds/Animated/Flag/FlagBlack16x16.png" id="1_lscei"]
+[ext_resource type="Script" path="res://Sprite2D.gd" id="2_xn6jv"]
+
+[sub_resource type="Animation" id="Animation_ikpev"]
+resource_name = "flag"
+length = 0.35
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_5v8jo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ms1rl"]
+_data = {
+"RESET": SubResource("Animation_5v8jo"),
+"flag": SubResource("Animation_ikpev")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d5xgt"]
+size = Vector2(12, 14)
+
+[node name="Flag" type="CharacterBody2D"]
+script = ExtResource("1_4pyiu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("1_lscei")
+hframes = 4
+script = ExtResource("2_xn6jv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ms1rl")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_d5xgt")
