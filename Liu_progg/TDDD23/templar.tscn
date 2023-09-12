@@ -1,7 +1,7 @@
-[gd_scene load_steps=49 format=3 uid="uid://c1t20b6i3b245"]
+[gd_scene load_steps=53 format=3 uid="uid://c1t20b6i3b245"]
 
-[ext_resource type="Texture2D" uid="uid://di16lg8vld62a" path="res://art/CharAni-Sheet4.png" id="1_em32s"]
-[ext_resource type="Script" path="res://templar.gd" id="1_jm6ld"]
+[ext_resource type="Script" path="res://templar.gd" id="1_45ydi"]
+[ext_resource type="Texture2D" uid="uid://di16lg8vld62a" path="res://art/CharAni-Sheet4.png" id="2_s86qm"]
 
 [sub_resource type="Animation" id="Animation_je3rn"]
 length = 0.001
@@ -377,6 +377,12 @@ animation = &"attack-left"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v4nu6"]
 animation = &"attack-right"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1vk4y"]
+animation = &"damaged"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fc003"]
+animation = &"die-ground"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_23nck"]
 animation = &"idle"
 
@@ -437,12 +443,20 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5a7kv"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_i8pu0"]
 states/Start/position = Vector2(-607, 48.3927)
 states/attack-left/node = SubResource("AnimationNodeAnimation_3se45")
 states/attack-left/position = Vector2(-483.798, -191.409)
 states/attack-right/node = SubResource("AnimationNodeAnimation_v4nu6")
 states/attack-right/position = Vector2(456.702, 27.8408)
+states/damaged/node = SubResource("AnimationNodeAnimation_1vk4y")
+states/damaged/position = Vector2(241.702, -122.081)
+states/die-ground/node = SubResource("AnimationNodeAnimation_fc003")
+states/die-ground/position = Vector2(371.202, -62.581)
 states/idle/node = SubResource("AnimationNodeAnimation_23nck")
 states/idle/position = Vector2(-436.298, 49.1167)
 states/roll-right/node = SubResource("AnimationNodeAnimation_k3r7h")
@@ -457,16 +471,19 @@ states/run-up/node = SubResource("AnimationNodeAnimation_0qbup")
 states/run-up/position = Vector2(115.702, -191.159)
 states/thanos-snapped/node = SubResource("AnimationNodeAnimation_l8dav")
 states/thanos-snapped/position = Vector2(632.202, 73.7498)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_qnh4g"), "idle", "run-down", SubResource("AnimationNodeStateMachineTransition_nsnrq"), "idle", "run-left", SubResource("AnimationNodeStateMachineTransition_fy8uc"), "idle", "run-up", SubResource("AnimationNodeStateMachineTransition_i8p4d"), "idle", "run-sword", SubResource("AnimationNodeStateMachineTransition_vk6es"), "run-left", "idle", SubResource("AnimationNodeStateMachineTransition_86tq8"), "run-up", "idle", SubResource("AnimationNodeStateMachineTransition_vi8ap"), "run-sword", "idle", SubResource("AnimationNodeStateMachineTransition_6xrlp"), "run-down", "idle", SubResource("AnimationNodeStateMachineTransition_bh0pv"), "attack-right", "idle", SubResource("AnimationNodeStateMachineTransition_ar1e5"), "roll-right", "idle", SubResource("AnimationNodeStateMachineTransition_1y4jq"), "thanos-snapped", "idle", SubResource("AnimationNodeStateMachineTransition_wkgdm"), "attack-left", "idle", SubResource("AnimationNodeStateMachineTransition_3y5me")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_qnh4g"), "idle", "run-down", SubResource("AnimationNodeStateMachineTransition_nsnrq"), "idle", "run-left", SubResource("AnimationNodeStateMachineTransition_fy8uc"), "idle", "run-up", SubResource("AnimationNodeStateMachineTransition_i8p4d"), "idle", "run-sword", SubResource("AnimationNodeStateMachineTransition_vk6es"), "run-left", "idle", SubResource("AnimationNodeStateMachineTransition_86tq8"), "run-up", "idle", SubResource("AnimationNodeStateMachineTransition_vi8ap"), "run-sword", "idle", SubResource("AnimationNodeStateMachineTransition_6xrlp"), "run-down", "idle", SubResource("AnimationNodeStateMachineTransition_bh0pv"), "attack-right", "idle", SubResource("AnimationNodeStateMachineTransition_ar1e5"), "roll-right", "idle", SubResource("AnimationNodeStateMachineTransition_1y4jq"), "thanos-snapped", "idle", SubResource("AnimationNodeStateMachineTransition_wkgdm"), "attack-left", "idle", SubResource("AnimationNodeStateMachineTransition_3y5me"), "damaged", "idle", SubResource("AnimationNodeStateMachineTransition_5a7kv")]
 graph_offset = Vector2(-666.298, -249.081)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tfspu"]
+radius = 12.0
 
 [node name="templar" type="CharacterBody2D"]
 position = Vector2(100, 100)
-script = ExtResource("1_jm6ld")
+script = ExtResource("1_45ydi")
 speed = 200
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_em32s")
+texture = ExtResource("2_s86qm")
 hframes = 10
 vframes = 24
 
@@ -481,3 +498,18 @@ shape = SubResource("CapsuleShape2D_b0wul")
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_i8pu0")
 anim_player = NodePath("../AnimationPlayer")
+
+[node name="player_hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_hitbox"]
+shape = SubResource("CapsuleShape2D_tfspu")
+
+[node name="attack_cooldown" type="Timer" parent="."]
+
+[node name="death_cooldown" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
+[connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]
+[connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="death_cooldown" to="." method="_on_death_cooldown_timeout"]

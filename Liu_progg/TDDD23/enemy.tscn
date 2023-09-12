@@ -1,8 +1,8 @@
-[gd_scene load_steps=55 format=3 uid="uid://x3tohfiet0f4"]
+[gd_scene load_steps=56 format=3 uid="uid://x3tohfiet0f4"]
 
 [ext_resource type="Texture2D" uid="uid://dyelis5c0acfi" path="res://art/Skeleton/Skeleton/Idle.png" id="1_1wn3b"]
-[ext_resource type="Script" path="res://enemy.gd" id="1_iw6nu"]
 [ext_resource type="Texture2D" uid="uid://b58jcc52ch1u3" path="res://art/Skeleton/Skeleton/Attack.png" id="1_kmv1e"]
+[ext_resource type="Script" path="res://enemy.gd" id="1_rdyt5"]
 [ext_resource type="Texture2D" uid="uid://o2qyetxkfbqi" path="res://art/Skeleton/skeleton2/Attack2.png" id="2_l2umy"]
 [ext_resource type="Texture2D" uid="uid://1tfsfliqsc4x" path="res://art/Skeleton/Attack3.png" id="3_60uf1"]
 [ext_resource type="Texture2D" uid="uid://cwqxchyuijh3m" path="res://art/Skeleton/Skeleton/Death.png" id="4_kk5og"]
@@ -274,7 +274,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_02ur8")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 5.0
 }, {
@@ -291,7 +291,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7tc4w")
 }],
-"loop": true,
+"loop": false,
 "name": &"hit",
 "speed": 5.0
 }, {
@@ -352,16 +352,19 @@ radius = 6.25
 height = 57.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_466ha"]
-radius = 248.0
+radius = 848.009
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lui7n"]
+radius = 34.0
 
 [node name="enemy" type="CharacterBody2D"]
 position = Vector2(244, 190)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("1_iw6nu")
+script = ExtResource("1_rdyt5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0qxh7")
-animation = &"attack3"
+animation = &"death"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_23ok1")
@@ -369,8 +372,18 @@ shape = SubResource("CapsuleShape2D_23ok1")
 [node name="detectionArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detectionArea"]
-position = Vector2(0, 2)
+position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_466ha")
+
+[node name="enemy_hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_hitbox"]
+shape = SubResource("CircleShape2D_lui7n")
+
+[node name="attack_cooldown" type="Timer" parent="."]
 
 [connection signal="body_entered" from="detectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="enemy_hitbox" to="." method="_on_enemy_hitbox_body_entered"]
+[connection signal="body_exited" from="enemy_hitbox" to="." method="_on_enemy_hitbox_body_exited"]
+[connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
