@@ -22,38 +22,54 @@ func _ready():
 func _process(delta):
 	if player_alive:
 		var moving = false
-		var attacking = false
 		var current = _state_machine.get_current_node()
 		if current != "roll-right" and current != "thanos-snapped":
 			$Sprite2D.flip_h = false
 		var velocity = Vector2.ZERO # The player's movement vector.
-		var looking_right = true
+		var looking_right = false
+		var looking_up = false
+		var looking_down = true
 		if Input.is_action_pressed("down"):
 			velocity.y += 1
 			moving = true
+			looking_up = false
+			looking_right = false
+			looking_down = true
 			_state_machine.travel("run-down")
 		if Input.is_action_pressed("up"):
 			velocity.y -= 1
 			moving = true
+			looking_up = true
+			looking_right = false
+			looking_down = false
 			_state_machine.travel("run-up")
 		if Input.is_action_pressed("right"):
 			velocity.x += 1
 			looking_right = true
+			looking_up = false
+			looking_down = false
 			moving = true
 			_state_machine.travel("run-sword")
 		if Input.is_action_pressed("left"):
 			velocity.x -= 1
 			looking_right = false
+			looking_up = false
+			looking_down = false
 			moving = true
 			_state_machine.travel("run-left")
 		if Input.is_action_pressed("attack"):
 			moving = true
-			attacking = true
-			global.player_attacking = true
+
 			if looking_right:
 				_state_machine.travel("attack-right")
 			else:
-				_state_machine.travel("attack-left")
+				if looking_up:
+					_state_machine.travel("attack-up")
+				else:
+					if looking_down:
+						_state_machine.travel("attack-down")
+					else:
+						_state_machine.travel("attack-left")
 		if Input.is_action_pressed("roll"):
 			moving = true
 			if looking_right:
@@ -76,8 +92,6 @@ func _process(delta):
 			health = 100
 			_state_machine.travel("die-ground")
 			moving = true
-		if not attacking:
-				global.player_attacking = false
 		if not moving:
 			_state_machine.travel("idle")
 		
@@ -121,3 +135,23 @@ func _on_attack_cooldown_timeout():
 
 func _on_death_cooldown_timeout():
 	player_alive = true
+
+
+func _on_swordhitright_body_entered(body):
+	if body.has_method("enemy"):
+		global.player_attacking = true
+
+
+func _on_swordhitright_body_exited(body):
+	global.player_attacking = false
+
+
+func _on_swordhitleft_body_entered(body):
+	print("works")
+	if body.has_method("enemy"):
+		print("in enemy")
+		global.player_attacking = true
+
+
+func _on_swordhitleft_body_exited(body):
+	global.player_attacking = false

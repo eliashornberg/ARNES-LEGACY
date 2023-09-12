@@ -1,7 +1,13 @@
-[gd_scene load_steps=53 format=3 uid="uid://c1t20b6i3b245"]
+[gd_scene load_steps=59 format=3 uid="uid://c1t20b6i3b245"]
 
 [ext_resource type="Script" path="res://templar.gd" id="1_45ydi"]
 [ext_resource type="Texture2D" uid="uid://di16lg8vld62a" path="res://art/CharAni-Sheet4.png" id="2_s86qm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1a333"]
+size = Vector2(15, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2py1l"]
+size = Vector2(14, 20)
 
 [sub_resource type="Animation" id="Animation_je3rn"]
 length = 0.001
@@ -16,6 +22,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/swordhit-right/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/swordhit-left/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_q7kkp"]
@@ -49,6 +79,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [180, 181, 182, 183, 184, 185]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/swordhit-left/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
 
 [sub_resource type="Animation" id="Animation_fxk2g"]
 resource_name = "attack-right"
@@ -64,6 +106,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [160, 161, 162, 163, 164, 165]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/swordhit-right/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
 }
 
 [sub_resource type="Animation" id="Animation_avpvh"]
@@ -371,11 +425,17 @@ _data = {
 radius = 7.0
 height = 18.0
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fsum1"]
+animation = &"attack-down"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3se45"]
 animation = &"attack-left"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v4nu6"]
 animation = &"attack-right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4ji22"]
+animation = &"attack-up"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1vk4y"]
 animation = &"damaged"
@@ -447,12 +507,24 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vaqjo"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ffrhw"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_i8pu0"]
 states/Start/position = Vector2(-607, 48.3927)
+states/attack-down/node = SubResource("AnimationNodeAnimation_fsum1")
+states/attack-down/position = Vector2(223.501, -71.4958)
 states/attack-left/node = SubResource("AnimationNodeAnimation_3se45")
 states/attack-left/position = Vector2(-483.798, -191.409)
 states/attack-right/node = SubResource("AnimationNodeAnimation_v4nu6")
 states/attack-right/position = Vector2(456.702, 27.8408)
+states/attack-up/node = SubResource("AnimationNodeAnimation_4ji22")
+states/attack-up/position = Vector2(252.401, -20.7708)
 states/damaged/node = SubResource("AnimationNodeAnimation_1vk4y")
 states/damaged/position = Vector2(241.702, -122.081)
 states/die-ground/node = SubResource("AnimationNodeAnimation_fc003")
@@ -471,11 +543,12 @@ states/run-up/node = SubResource("AnimationNodeAnimation_0qbup")
 states/run-up/position = Vector2(115.702, -191.159)
 states/thanos-snapped/node = SubResource("AnimationNodeAnimation_l8dav")
 states/thanos-snapped/position = Vector2(632.202, 73.7498)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_qnh4g"), "idle", "run-down", SubResource("AnimationNodeStateMachineTransition_nsnrq"), "idle", "run-left", SubResource("AnimationNodeStateMachineTransition_fy8uc"), "idle", "run-up", SubResource("AnimationNodeStateMachineTransition_i8p4d"), "idle", "run-sword", SubResource("AnimationNodeStateMachineTransition_vk6es"), "run-left", "idle", SubResource("AnimationNodeStateMachineTransition_86tq8"), "run-up", "idle", SubResource("AnimationNodeStateMachineTransition_vi8ap"), "run-sword", "idle", SubResource("AnimationNodeStateMachineTransition_6xrlp"), "run-down", "idle", SubResource("AnimationNodeStateMachineTransition_bh0pv"), "attack-right", "idle", SubResource("AnimationNodeStateMachineTransition_ar1e5"), "roll-right", "idle", SubResource("AnimationNodeStateMachineTransition_1y4jq"), "thanos-snapped", "idle", SubResource("AnimationNodeStateMachineTransition_wkgdm"), "attack-left", "idle", SubResource("AnimationNodeStateMachineTransition_3y5me"), "damaged", "idle", SubResource("AnimationNodeStateMachineTransition_5a7kv")]
-graph_offset = Vector2(-666.298, -249.081)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_qnh4g"), "idle", "run-down", SubResource("AnimationNodeStateMachineTransition_nsnrq"), "idle", "run-left", SubResource("AnimationNodeStateMachineTransition_fy8uc"), "idle", "run-up", SubResource("AnimationNodeStateMachineTransition_i8p4d"), "idle", "run-sword", SubResource("AnimationNodeStateMachineTransition_vk6es"), "run-left", "idle", SubResource("AnimationNodeStateMachineTransition_86tq8"), "run-up", "idle", SubResource("AnimationNodeStateMachineTransition_vi8ap"), "run-sword", "idle", SubResource("AnimationNodeStateMachineTransition_6xrlp"), "run-down", "idle", SubResource("AnimationNodeStateMachineTransition_bh0pv"), "attack-right", "idle", SubResource("AnimationNodeStateMachineTransition_ar1e5"), "roll-right", "idle", SubResource("AnimationNodeStateMachineTransition_1y4jq"), "thanos-snapped", "idle", SubResource("AnimationNodeStateMachineTransition_wkgdm"), "attack-left", "idle", SubResource("AnimationNodeStateMachineTransition_3y5me"), "damaged", "idle", SubResource("AnimationNodeStateMachineTransition_5a7kv"), "attack-up", "idle", SubResource("AnimationNodeStateMachineTransition_vaqjo"), "attack-down", "idle", SubResource("AnimationNodeStateMachineTransition_ffrhw")]
+graph_offset = Vector2(-150.299, -138.951)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tfspu"]
-radius = 12.0
+radius = 6.0
+height = 18.0
 
 [node name="templar" type="CharacterBody2D"]
 position = Vector2(100, 100)
@@ -487,12 +560,27 @@ texture = ExtResource("2_s86qm")
 hframes = 10
 vframes = 24
 
+[node name="swordhit-right" type="Area2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/swordhit-right"]
+position = Vector2(8.5, -1)
+shape = SubResource("RectangleShape2D_1a333")
+disabled = true
+
+[node name="swordhit-left" type="Area2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/swordhit-left"]
+position = Vector2(-9, -1)
+shape = SubResource("RectangleShape2D_2py1l")
+disabled = true
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_gs2nq")
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CapsuleShape2D_b0wul")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
@@ -502,6 +590,7 @@ anim_player = NodePath("../AnimationPlayer")
 [node name="player_hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_hitbox"]
+position = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_tfspu")
 
 [node name="attack_cooldown" type="Timer" parent="."]
@@ -509,6 +598,10 @@ shape = SubResource("CapsuleShape2D_tfspu")
 [node name="death_cooldown" type="Timer" parent="."]
 wait_time = 5.0
 
+[connection signal="body_entered" from="Sprite2D/swordhit-right" to="." method="_on_swordhitright_body_entered"]
+[connection signal="body_exited" from="Sprite2D/swordhit-right" to="." method="_on_swordhitright_body_exited"]
+[connection signal="body_entered" from="Sprite2D/swordhit-left" to="." method="_on_swordhitleft_body_entered"]
+[connection signal="body_exited" from="Sprite2D/swordhit-left" to="." method="_on_swordhitleft_body_exited"]
 [connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]

@@ -6901,7 +6901,6 @@ position = Vector2(-115.5, 619)
 
 [node name="enemy" parent="." instance=ExtResource("15_5q6ys")]
 position = Vector2(275.333, 299.333)
-speed = 40
 
 [node name="spinner" parent="." instance=ExtResource("15_ow6tm")]
 position = Vector2(172.667, 242.667)
@@ -6920,3 +6919,5 @@ position = Vector2(1229.5, 251.667)
 [node name="Flag6" parent="." instance=ExtResource("14_bgbhn")]
 z_index = 3
 position = Vector2(1262.5, 411.333)
+
+[node name="enemy2" parent="." instance=ExtResource("15_5q6ys")]

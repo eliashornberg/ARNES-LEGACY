@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed = 40 # How fast the player will move (pixels/sec).
+@export var speed = 100 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
 
 @onready var _animatedSprite2d = $AnimatedSprite2D
