@@ -13,6 +13,7 @@ var enemy_in_attack_range = false
 var enemy_attack_cooldown = true
 var health = 200
 var player_alive = true
+var hit_taken = false
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -84,8 +85,9 @@ func _process(delta):
 			else:
 				$Sprite2D.flip_h = true
 				_state_machine.travel("thanos-snapped")
-		if enemy_attack():
+		if hit_taken:
 			moving = true
+			hit_taken = false
 		if health <= 0:
 			player_alive = false
 			$death_cooldown.start()
@@ -107,30 +109,11 @@ func _process(delta):
 	
 func templar():
 	pass
-
-
-func _on_player_hitbox_body_entered(body):
-	if body.has_method("enemy"):
-		enemy_in_attack_range = true
-
-
-func _on_player_hitbox_body_exited(body):
-	if body.has_method("enemy"):
-		enemy_in_attack_range = false
 		
-func enemy_attack():
-	if enemy_in_attack_range and enemy_attack_cooldown:
-		health -= 20
-		enemy_attack_cooldown = false
-		$attack_cooldown.start()
-		_state_machine.travel("damaged")
-		return true
-	else:
-		return false
-
-
-func _on_attack_cooldown_timeout():
-	enemy_attack_cooldown = true
+func enemy_attack(damage):
+	hit_taken = true
+	health -= damage
+	_state_machine.travel("damaged")
 
 
 func _on_death_cooldown_timeout():

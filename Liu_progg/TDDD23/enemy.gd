@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var speed = 100 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
+var attacks = ["attack", "attack2", "attack3"]
 
 @onready var _animatedSprite2d = $AnimatedSprite2D
 var switch = 0
@@ -10,8 +11,11 @@ var chase = false
 var player = null
 var health = 100
 var player_in_attack_range = false
-var attack_cooldown = true
+var attacked_cooldown = true
 var enemy_dead = false
+var in_attack_range = false
+var attack_cooldown = true
+var damage = 20
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -61,9 +65,9 @@ func _on_enemy_hitbox_body_exited(body):
 		player_in_attack_range = false
 		
 func enemy_attacked():
-	if player_in_attack_range and global.player_attacking and attack_cooldown:
-		attack_cooldown = false
-		$attack_cooldown.start()
+	if player_in_attack_range and global.player_attacking and attacked_cooldown:
+		attacked_cooldown = false
+		$attacked_cooldown.start()
 		health -= 20
 		print(health)
 		_animatedSprite2d.play("hit")
@@ -71,6 +75,26 @@ func enemy_attacked():
 			enemy_dead = true
 			_animatedSprite2d.play("death")
 			
+
+
+func _on_attacked_cooldown_timeout():
+	attacked_cooldown = true
+
+
+func _on_enemy_attack_body_entered(body):
+	if body.has_method("templar") and attack_cooldown:
+		_animatedSprite2d.play("attack")
+		in_attack_range = true
+		attack_cooldown = false
+		$attack_cooldown.start()
+		body.enemy_attack(damage)
+		
+
+
+func _on_enemy_attack_body_exited(body):
+	if body.has_method("templar"):
+		in_attack_range = false
+		
 
 
 func _on_attack_cooldown_timeout():
