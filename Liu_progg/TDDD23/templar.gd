@@ -147,11 +147,27 @@ func _on_swordhitright_body_exited(body):
 
 
 func _on_swordhitleft_body_entered(body):
-	print("works")
 	if body.has_method("enemy"):
-		print("in enemy")
 		global.player_attacking = true
 
 
 func _on_swordhitleft_body_exited(body):
+	global.player_attacking = false
+
+
+func _on_swordhitdown_body_entered(body):
+	if body.has_method("enemy"):
+		global.player_attacking = true
+
+
+func _on_swordhitdown_body_exited(body):
+	global.player_attacking = false
+
+
+func _on_swordhitup_body_entered(body):
+	if body.has_method("enemy"):
+		global.player_attacking = true
+
+
+func _on_swordhitup_body_exited(body):
 	global.player_attacking = false
