@@ -41,6 +41,7 @@ func _process(delta):
 			_animatedSprite2d.flip_h = true
 			flipped = true
 		else:
+			
 			flipped = false
 			_animatedSprite2d.flip_h = false
 		position += movement
