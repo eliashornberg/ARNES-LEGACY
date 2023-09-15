@@ -17,8 +17,8 @@ var hit_taken = false
 
 func _ready():
 	screen_size = get_viewport_rect().size
-	_state_machine.travel("idle")
 	_animation_tree.active = true
+	_state_machine.travel("idle")
 	
 func _process(delta):
 	if player_alive:

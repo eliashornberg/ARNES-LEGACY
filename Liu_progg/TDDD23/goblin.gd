@@ -85,7 +85,6 @@ func _on_attack_cooldown_timeout():
 
 func _on_enemy_attack_body_entered(body):
 	if body.has_method("templar") and attack_cooldown:
-		print("ja")
 		_animatedSprite2d.play("attack2")
 		in_attack_range = true
 		attack_cooldown = false

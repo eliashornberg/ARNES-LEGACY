@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dj5ksm4rpbuec"]
+[gd_scene load_steps=28 format=3 uid="uid://dj5ksm4rpbuec"]
 
 [ext_resource type="PackedScene" uid="uid://c1t20b6i3b245" path="res://templar.tscn" id="1_kehew"]
 [ext_resource type="Texture2D" uid="uid://t5lrftcn6qdg" path="res://art/NinjaAdventure/Backgrounds/Tilesets/TilesetFloor.png" id="2_byblk"]
@@ -15,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://dd4tm25k5nqty" path="res://flag.tscn" id="14_bgbhn"]
 [ext_resource type="PackedScene" uid="uid://x3tohfiet0f4" path="res://enemy.tscn" id="15_5q6ys"]
 [ext_resource type="PackedScene" uid="uid://bg0tywlw6eemh" path="res://spinner.tscn" id="15_ow6tm"]
-[ext_resource type="PackedScene" uid="uid://ct1gwi15wjhd4" path="res://goblin.tscn" id="16_oi2ww"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lafp8"]
 texture = ExtResource("2_byblk")
@@ -6920,8 +6919,3 @@ position = Vector2(1229.5, 251.667)
 [node name="Flag6" parent="." instance=ExtResource("14_bgbhn")]
 z_index = 3
 position = Vector2(1262.5, 411.333)
-
-[node name="enemy2" parent="." instance=ExtResource("15_5q6ys")]
-
-[node name="goblin" parent="." instance=ExtResource("16_oi2ww")]
-position = Vector2(220.5, 497.333)
