@@ -102,13 +102,12 @@ func _process(delta):
 
 		if velocity.length() > 0:
 			velocity = velocity.normalized() * speed
-			
+		print(position, "innan")
 		position += velocity * delta
 		position = position.clamp(Vector2.ZERO, screen_size)
+		print(position, "efter")
+		print(velocity, "velocity")
 		move_and_slide()
-	
-func templar():
-	pass
 		
 func enemy_attack(damage):
 	hit_taken = true
@@ -121,7 +120,7 @@ func _on_death_cooldown_timeout():
 
 
 func _on_swordhitright_body_entered(body):
-	if body.has_method("enemy"):
+	if body.is_in_group("enemies"):
 		global.player_attacking = true
 
 
@@ -130,7 +129,7 @@ func _on_swordhitright_body_exited(body):
 
 
 func _on_swordhitleft_body_entered(body):
-	if body.has_method("enemy"):
+	if body.is_in_group("enemies"):
 		global.player_attacking = true
 
 
@@ -139,7 +138,7 @@ func _on_swordhitleft_body_exited(body):
 
 
 func _on_swordhitdown_body_entered(body):
-	if body.has_method("enemy"):
+	if body.is_in_group("enemies"):
 		global.player_attacking = true
 
 
@@ -148,9 +147,10 @@ func _on_swordhitdown_body_exited(body):
 
 
 func _on_swordhitup_body_entered(body):
-	if body.has_method("enemy"):
+	if body.is_in_group("enemies"):
 		global.player_attacking = true
 
 
 func _on_swordhitup_body_exited(body):
 	global.player_attacking = false
+	

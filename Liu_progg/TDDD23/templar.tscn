@@ -600,7 +600,7 @@ states/thanos-snapped/position = Vector2(632.202, 73.7498)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_qnh4g"), "idle", "run-down", SubResource("AnimationNodeStateMachineTransition_nsnrq"), "idle", "run-left", SubResource("AnimationNodeStateMachineTransition_fy8uc"), "idle", "run-up", SubResource("AnimationNodeStateMachineTransition_i8p4d"), "idle", "run-sword", SubResource("AnimationNodeStateMachineTransition_vk6es"), "run-left", "idle", SubResource("AnimationNodeStateMachineTransition_86tq8"), "run-up", "idle", SubResource("AnimationNodeStateMachineTransition_vi8ap"), "run-sword", "idle", SubResource("AnimationNodeStateMachineTransition_6xrlp"), "run-down", "idle", SubResource("AnimationNodeStateMachineTransition_bh0pv"), "attack-right", "idle", SubResource("AnimationNodeStateMachineTransition_ar1e5"), "roll-right", "idle", SubResource("AnimationNodeStateMachineTransition_1y4jq"), "thanos-snapped", "idle", SubResource("AnimationNodeStateMachineTransition_wkgdm"), "attack-left", "idle", SubResource("AnimationNodeStateMachineTransition_3y5me"), "damaged", "idle", SubResource("AnimationNodeStateMachineTransition_5a7kv"), "attack-up", "idle", SubResource("AnimationNodeStateMachineTransition_vaqjo"), "attack-down", "idle", SubResource("AnimationNodeStateMachineTransition_ffrhw")]
 graph_offset = Vector2(-395.399, -162.771)
 
-[node name="templar" type="CharacterBody2D"]
+[node name="templar" type="CharacterBody2D" groups=["hero"]]
 position = Vector2(100, 100)
 script = ExtResource("1_45ydi")
 speed = 200
@@ -644,7 +644,6 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CapsuleShape2D_b0wul")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
