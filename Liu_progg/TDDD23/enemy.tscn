@@ -778,7 +778,6 @@ shape = SubResource("RectangleShape2D_oyj81")
 disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CapsuleShape2D_23ok1")
 
 [node name="detectionArea" type="Area2D" parent="."]

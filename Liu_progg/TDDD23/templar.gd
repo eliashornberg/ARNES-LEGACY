@@ -102,11 +102,8 @@ func _process(delta):
 
 		if velocity.length() > 0:
 			velocity = velocity.normalized() * speed
-		print(position, "innan")
 		position += velocity * delta
 		position = position.clamp(Vector2.ZERO, screen_size)
-		print(position, "efter")
-		print(velocity, "velocity")
 		move_and_slide()
 		
 func enemy_attack(damage):
