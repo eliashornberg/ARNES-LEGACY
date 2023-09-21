@@ -3,6 +3,11 @@ extends Node2D
 @export var enemy_scene: PackedScene
 
 var spawn_timer = true
+var spawn_freq = 10
+var wave = 0
+var wave_active = false
+var wave_timer_running = false
+var waves_timer = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,13 +18,28 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if spawn_timer:
+	if not wave_timer_running and global.enemies == 0:
+		wave_active = false
+		start_wave()
+		print(wave)
+	if spawn_timer and wave_active:
 		$Spawn_timer.start()
 		spawn_timer = false
 		
 	
 
+func start_wave():
+	wave += 1
+	$Spawn_timer.wait_time = spawn_freq/wave
+	spawn_timer = true
+	$wave_timer.start()
+	wave_timer_running = true
+	wave_active = true
+	
+	
+
 func spawn_enemy():
+	global.enemies += 1
 	var enemy = enemy_scene.instantiate()
 	enemy.position = Vector2(85,190)
 	add_child(enemy)
@@ -40,3 +60,10 @@ func _on_bateman_area_2d_body_entered(body):
 func _on_bateman_area_2d_body_exited(body):
 	if body.is_in_group("hero"):
 		global.justEnteredWorld = false
+
+
+func _on_wave_timer_timeout():
+	$Spawn_timer.stop()
+	spawn_timer = false
+	wave_timer_running = false
+	

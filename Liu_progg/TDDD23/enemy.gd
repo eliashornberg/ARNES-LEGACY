@@ -117,6 +117,7 @@ func enemy_attacked():
 		_state_machine.travel("hit")
 		if health <= 0:
 			_state_machine.travel("death")
+			global.enemies -= 1
 	
 func attack():
 	if in_attack_range and attack_cooldown:

@@ -6944,7 +6944,7 @@ z_index = 3
 position = Vector2(1262.5, 411.333)
 
 [node name="Spawn_timer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 10.0
 
 [node name="batemanArea2d" type="Area2D" parent="."]
 
@@ -6952,6 +6952,10 @@ wait_time = 5.0
 position = Vector2(568.75, 440.25)
 shape = SubResource("RectangleShape2D_3n34h")
 
+[node name="wave_timer" type="Timer" parent="."]
+wait_time = 20.0
+
 [connection signal="timeout" from="Spawn_timer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="body_entered" from="batemanArea2d" to="." method="_on_bateman_area_2d_body_entered"]
 [connection signal="body_exited" from="batemanArea2d" to="." method="_on_bateman_area_2d_body_exited"]
+[connection signal="timeout" from="wave_timer" to="." method="_on_wave_timer_timeout"]

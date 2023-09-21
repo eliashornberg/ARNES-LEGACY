@@ -796,6 +796,7 @@ shape = SubResource("CircleShape2D_lui7n")
 [node name="attacked_cooldown" type="Timer" parent="."]
 
 [node name="attack_cooldown" type="Timer" parent="."]
+wait_time = 2.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
