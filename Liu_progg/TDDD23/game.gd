@@ -4,33 +4,37 @@ extends Node2D
 
 var spawn_timer = true
 var spawn_freq = 10
-var wave = 0
 var wave_active = false
 var wave_timer_running = false
 var waves_timer = []
+var start = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if global.justEnteredWorld:
+		$HUD._start()
 		$templar.position.x = 568
 		$templar.position.y = 441
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if not wave_timer_running and global.enemies == 0:
-		wave_active = false
-		start_wave()
-		print(wave)
-	if spawn_timer and wave_active:
-		$Spawn_timer.start()
-		spawn_timer = false
+	if global.game_started and not start:
+		$HUD._start()
+	if start:
+		if not wave_timer_running and global.enemies == 0:
+			wave_active = false
+			start_wave()
+		if spawn_timer and wave_active:
+			$Spawn_timer.start()
+			spawn_timer = false
 		
 	
 
 func start_wave():
-	wave += 1
-	$Spawn_timer.wait_time = spawn_freq/wave
+	global.wave += 1
+	$HUD.update_wave()
+	$Spawn_timer.wait_time = spawn_freq/global.wave
 	spawn_timer = true
 	$wave_timer.start()
 	wave_timer_running = true
@@ -67,3 +71,7 @@ func _on_wave_timer_timeout():
 	spawn_timer = false
 	wave_timer_running = false
 	
+
+
+func _on_hud_start_game():
+	start = true

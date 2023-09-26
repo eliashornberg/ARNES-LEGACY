@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dyelis5c0acfi" path="res://art/Skeleton/Skeleton/Idle.png" id="1_1wn3b"]
 [ext_resource type="Texture2D" uid="uid://b58jcc52ch1u3" path="res://art/Skeleton/Skeleton/Attack.png" id="1_kmv1e"]
-[ext_resource type="Script" path="res://enemy.gd" id="1_rdyt5"]
+[ext_resource type="Script" path="res://enemy.gd" id="1_wosdu"]
 [ext_resource type="Texture2D" uid="uid://o2qyetxkfbqi" path="res://art/Skeleton/skeleton2/Attack2.png" id="2_l2umy"]
 [ext_resource type="Texture2D" uid="uid://1tfsfliqsc4x" path="res://art/Skeleton/Attack3.png" id="3_60uf1"]
 [ext_resource type="Texture2D" uid="uid://cwqxchyuijh3m" path="res://art/Skeleton/Skeleton/Death.png" id="4_kk5og"]
@@ -740,7 +740,7 @@ graph_offset = Vector2(291.855, -5.72251)
 [node name="enemy" type="CharacterBody2D" groups=["enemies"]]
 position = Vector2(244, 190)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("1_rdyt5")
+script = ExtResource("1_wosdu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0qxh7")

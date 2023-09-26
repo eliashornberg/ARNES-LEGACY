@@ -21,12 +21,13 @@ func _ready():
 	_state_machine.travel("idle")
 	
 func _process(delta):
+	var velocity = Vector2() # The player's movement vector.
 	if player_alive:
 		var moving = false
+		var change_position = false
 		var current = _state_machine.get_current_node()
 		if current != "roll-right" and current != "thanos-snapped":
 			$Sprite2D.flip_h = false
-		var velocity = Vector2.ZERO # The player's movement vector.
 		var looking_right = false
 		var looking_up = false
 		var looking_down = true
@@ -36,6 +37,7 @@ func _process(delta):
 			looking_up = false
 			looking_right = false
 			looking_down = true
+			change_position = true
 			_state_machine.travel("run-down")
 		if Input.is_action_pressed("up"):
 			velocity.y -= 1
@@ -43,6 +45,7 @@ func _process(delta):
 			looking_up = true
 			looking_right = false
 			looking_down = false
+			change_position = true
 			_state_machine.travel("run-up")
 		if Input.is_action_pressed("right"):
 			velocity.x += 1
@@ -50,6 +53,7 @@ func _process(delta):
 			looking_up = false
 			looking_down = false
 			moving = true
+			change_position = true
 			_state_machine.travel("run-sword")
 		if Input.is_action_pressed("left"):
 			velocity.x -= 1
@@ -57,6 +61,7 @@ func _process(delta):
 			looking_up = false
 			looking_down = false
 			moving = true
+			change_position = true
 			_state_machine.travel("run-left")
 		if Input.is_action_pressed("attack"):
 			moving = true
@@ -90,21 +95,25 @@ func _process(delta):
 			hit_taken = false
 		if health <= 0:
 			player_alive = false
+			global.player_attacking = false
 			$death_cooldown.start()
 			health = 100
 			_state_machine.travel("die-ground")
 			moving = true
 		if not moving:
 			_state_machine.travel("idle")
+		else:
+			if not global.game_started:
+				global.game_started = true
 		
 	
 		
-
-		if velocity.length() > 0:
-			velocity = velocity.normalized() * speed
-		position += velocity * delta
-		position = position.clamp(Vector2.ZERO, screen_size)
-		move_and_slide()
+		if change_position:
+			if velocity.length() > 0:
+				velocity = velocity.normalized() * speed
+			position += velocity * delta
+			position = position.clamp(Vector2.ZERO, screen_size)
+			move_and_slide()
 		
 func enemy_attack(damage):
 	hit_taken = true

@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://dygc6hvpoqsr1"]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_me20i"]
+[ext_resource type="FontFile" uid="uid://b1fcjres08u3w" path="res://Chomsky.otf" id="1_nonwh"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_me20i")
+
+[node name="Wave" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -122.0
+offset_top = 20.0
+offset_right = 122.0
+offset_bottom = 123.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_nonwh")
+theme_override_font_sizes/font_size = 100
+text = "Wave"
+
+[node name="Money" type="Label" parent="."]
+offset_top = 18.0
+offset_right = 141.0
+offset_bottom = 86.0
+theme_override_fonts/font = ExtResource("1_nonwh")
+theme_override_font_sizes/font_size = 64
+text = "Cash"
+
+[node name="Life" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -26.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_nonwh")
+theme_override_font_sizes/font_size = 64
+text = "200"
+
+[node name="Instruction" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -693.0
+offset_top = -103.0
+offset_right = 693.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_nonwh")
+theme_override_font_sizes/font_size = 100
+text = "Move with WASD, fight with O. 
+             Kill all enemies!"
+autowrap_mode = 2
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
