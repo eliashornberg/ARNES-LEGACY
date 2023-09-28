@@ -13,6 +13,7 @@ var start = false
 func _ready():
 	if global.justEnteredWorld:
 		$HUD._start()
+		$HUD.show_wave()
 		$templar.position.x = 568
 		$templar.position.y = 441
 
@@ -22,9 +23,11 @@ func _process(delta):
 	if global.game_started and not start:
 		$HUD._start()
 	if start:
-		if not wave_timer_running and global.enemies == 0:
-			wave_active = false
-			start_wave()
+		if not wave_timer_running and global.enemies == 0 and wave_active:
+			end_wave()
+		if not wave_active:
+			if Input.is_action_pressed("StartWave"):
+				start_wave()
 		if spawn_timer and wave_active:
 			$Spawn_timer.start()
 			spawn_timer = false
@@ -39,6 +42,10 @@ func start_wave():
 	$wave_timer.start()
 	wave_timer_running = true
 	wave_active = true
+	
+func end_wave():
+	wave_active = false
+	$HUD.wave_ended()
 	
 	
 
@@ -57,7 +64,7 @@ func _on_spawn_timer_timeout():
 func _on_bateman_area_2d_body_entered(body):
 	if body.is_in_group("hero"):
 		global.justEnteredBatemanHouse = true
-		if not global.justEnteredWorld:
+		if not global.justEnteredWorld and not wave_active:
 			get_tree().change_scene_to_file("res://bateman_house.tscn")
 
 

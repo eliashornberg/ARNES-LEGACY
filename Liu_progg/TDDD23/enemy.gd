@@ -110,7 +110,6 @@ func _on_attack_cooldown_timeout():
 	
 	
 func enemy_attacked():
-	print(global.player_attacking)
 	if player_in_attack_range and global.player_attacking and attacked_cooldown:
 		attacked_cooldown = false
 		$attacked_cooldown.start()

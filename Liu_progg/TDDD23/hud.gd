@@ -21,7 +21,15 @@ func show_game_over():
 	$Button.show()
 	
 func update_wave():
+	$StartWaveText.hide()
 	$Wave.text = "Wave " + str(global.wave)
+	
+func show_wave():
+	$Wave.text = "Wave " + str(global.wave)
+	
+
+func wave_ended():
+	$StartWaveText.show()
 
 
 func _on_message_timer_timeout():
