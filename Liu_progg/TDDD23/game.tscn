@@ -1,10 +1,11 @@
-[gd_scene load_steps=31 format=3 uid="uid://dj5ksm4rpbuec"]
+[gd_scene load_steps=32 format=3 uid="uid://dj5ksm4rpbuec"]
 
 [ext_resource type="PackedScene" uid="uid://c1t20b6i3b245" path="res://templar.tscn" id="1_kehew"]
 [ext_resource type="Script" path="res://game.gd" id="1_o86jq"]
 [ext_resource type="Texture2D" uid="uid://t5lrftcn6qdg" path="res://art/NinjaAdventure/Backgrounds/Tilesets/TilesetFloor.png" id="2_byblk"]
 [ext_resource type="Texture2D" uid="uid://dlouywjptutta" path="res://art/NinjaAdventure/Backgrounds/Tilesets/TilesetDesert.png" id="2_vr1vk"]
 [ext_resource type="Texture2D" uid="uid://macj2n36fhqp" path="res://art/NinjaAdventure/Backgrounds/Tilesets/TilesetField.png" id="3_86kjv"]
+[ext_resource type="PackedScene" uid="uid://bl10c1fwvsemh" path="res://gold.tscn" id="3_ya2g6"]
 [ext_resource type="Texture2D" uid="uid://dxygd6f2qaayu" path="res://art/NinjaAdventure/Backgrounds/Animated/Flag/FlagBlack16x16.png" id="4_27cor"]
 [ext_resource type="Texture2D" uid="uid://bvg06jhfuauyd" path="res://art/NinjaAdventure/Backgrounds/Tilesets/TilesetHouse.png" id="4_qh3e4"]
 [ext_resource type="Texture2D" uid="uid://c5op728oe76ph" path="res://art/NinjaAdventure/Backgrounds/Animated/QuickSand/QuickSand32x32.png" id="4_x51qn"]
@@ -6888,6 +6889,7 @@ size = Vector2(15.1667, 14.5)
 scale = Vector2(6, 6)
 script = ExtResource("1_o86jq")
 enemy_scene = ExtResource("15_5q6ys")
+gold_scene = ExtResource("3_ya2g6")
 
 [node name="templar" parent="." instance=ExtResource("1_kehew")]
 
@@ -6963,6 +6965,7 @@ wait_time = 20.0
 
 [node name="HUD" parent="." instance=ExtResource("17_mcfed")]
 
+[connection signal="damage_taken" from="templar" to="." method="_on_templar_damage_taken"]
 [connection signal="timeout" from="Spawn_timer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="body_entered" from="batemanArea2d" to="." method="_on_bateman_area_2d_body_entered"]
 [connection signal="body_exited" from="batemanArea2d" to="." method="_on_bateman_area_2d_body_exited"]

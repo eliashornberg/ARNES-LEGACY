@@ -34,6 +34,9 @@ func _ready():
 	
 func _process(delta):
 	if _state_machine.get_current_node() == "End":
+		global.drop_gold = true
+		global.gold_pos = position
+		global.gold_amount = 30
 		self.queue_free()
 	else:
 		var movement = 0

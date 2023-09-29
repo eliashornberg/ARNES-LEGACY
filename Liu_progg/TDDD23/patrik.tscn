@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://02bve1enhkb2"]
+
+[ext_resource type="Script" path="res://patrik.gd" id="1_j34v1"]
+[ext_resource type="Texture2D" uid="uid://b65f71gkjkhep" path="res://characters.png" id="1_wlp55"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5dlq"]
+atlas = ExtResource("1_wlp55")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_807d1"]
+atlas = ExtResource("1_wlp55")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iv5x4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q5dlq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_807d1")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Patrik" type="CharacterBody2D"]
+z_index = 2
+script = ExtResource("1_j34v1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_iv5x4")
+animation = &"idle"
+frame_progress = 0.966721

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bkavpx5lo70cs"]
+[gd_scene load_steps=17 format=3 uid="uid://bkavpx5lo70cs"]
 
 [ext_resource type="Script" path="res://bateman_house.gd" id="1_f4ce2"]
 [ext_resource type="Texture2D" uid="uid://sbsoka63nbkx" path="res://art/NinjaAdventure/Backgrounds/Tilesets/Interior/TilesetInterior.png" id="1_yj6sw"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bvg06jhfuauyd" path="res://art/NinjaAdventure/Backgrounds/Tilesets/TilesetHouse.png" id="4_nmarm"]
 [ext_resource type="Texture2D" uid="uid://bftpkoqatle1s" path="res://art/NinjaAdventure/Backgrounds/Tilesets/Interior/Elements.png" id="5_ml8gm"]
 [ext_resource type="PackedScene" uid="uid://c1t20b6i3b245" path="res://templar.tscn" id="7_bsgrq"]
+[ext_resource type="PackedScene" uid="uid://02bve1enhkb2" path="res://patrik.tscn" id="8_3r7co"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vjjs6"]
 texture = ExtResource("1_yj6sw")
@@ -4003,6 +4004,9 @@ sources/12 = SubResource("TileSetAtlasSource_ri44h")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4hp6d"]
 size = Vector2(24.3333, 24.6666)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oorwr"]
+size = Vector2(55.6667, 40.3333)
+
 [node name="BatemanHouse" type="Node2D"]
 scale = Vector2(3, 3)
 script = ExtResource("1_f4ce2")
@@ -4031,11 +4035,23 @@ layer_2/tile_data = PackedInt32Array(393236, 1179652, 18, 393237, 1179652, 18, 3
 [node name="leaveBatemanArea2d" type="Area2D" parent="."]
 
 [node name="leaveBatemanCollisionshape2d" type="CollisionShape2D" parent="leaveBatemanArea2d"]
-position = Vector2(328.333, 238)
+position = Vector2(327.667, 237)
 shape = SubResource("RectangleShape2D_4hp6d")
 
 [node name="templar" parent="." instance=ExtResource("7_bsgrq")]
 position = Vector2(327.333, 236.667)
 
+[node name="Patrik" parent="." instance=ExtResource("8_3r7co")]
+z_index = -2
+position = Vector2(325.333, 87.3333)
+
+[node name="interactWithPatrikArea2d" type="Area2D" parent="."]
+
+[node name="interactWithPatrikCollisionshape2d" type="CollisionShape2D" parent="interactWithPatrikArea2d"]
+position = Vector2(326.667, 118.667)
+shape = SubResource("RectangleShape2D_oorwr")
+
 [connection signal="body_entered" from="leaveBatemanArea2d" to="." method="_on_leave_bateman_area_2d_body_entered"]
 [connection signal="body_exited" from="leaveBatemanArea2d" to="." method="_on_leave_bateman_area_2d_body_exited"]
+[connection signal="body_entered" from="interactWithPatrikArea2d" to="." method="_on_interact_with_patrik_area_2d_body_entered"]
+[connection signal="body_exited" from="interactWithPatrikArea2d" to="." method="_on_interact_with_patrik_area_2d_body_exited"]

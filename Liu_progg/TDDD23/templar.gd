@@ -3,6 +3,8 @@ extends CharacterBody2D
 @export var speed = 40 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
 
+signal damage_taken
+
 @onready var _animation_player = $AnimationPlayer
 
 @onready var _animation_tree = $AnimationTree
@@ -11,7 +13,6 @@ var screen_size # Size of the game window.
 
 var enemy_in_attack_range = false
 var enemy_attack_cooldown = true
-var health = 200
 var player_alive = true
 var hit_taken = false
 
@@ -93,11 +94,11 @@ func _process(delta):
 		if hit_taken:
 			moving = true
 			hit_taken = false
-		if health <= 0:
+		if global.health <= 0:
 			player_alive = false
 			global.player_attacking = false
 			$death_cooldown.start()
-			health = 100
+			global.health = 100
 			_state_machine.travel("die-ground")
 			moving = true
 		if not moving:
@@ -117,8 +118,9 @@ func _process(delta):
 		
 func enemy_attack(damage):
 	hit_taken = true
-	health -= damage
+	global.health -= damage
 	_state_machine.travel("damaged")
+	damage_taken.emit()
 
 
 func _on_death_cooldown_timeout():

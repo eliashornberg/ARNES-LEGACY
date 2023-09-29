@@ -27,6 +27,12 @@ func update_wave():
 func show_wave():
 	$Wave.text = "Wave " + str(global.wave)
 	
+func update_gold():
+	$Money.text = "Cash: " + str(global.gold)
+	
+func update_health():
+	$Life.text = str(global.health) + " health"
+	
 
 func wave_ended():
 	$StartWaveText.show()

@@ -25,7 +25,7 @@ offset_right = 141.0
 offset_bottom = 86.0
 theme_override_fonts/font = ExtResource("1_nonwh")
 theme_override_font_sizes/font_size = 64
-text = "Cash"
+text = "Cash: 0"
 
 [node name="Life" type="Label" parent="."]
 anchors_preset = 7
