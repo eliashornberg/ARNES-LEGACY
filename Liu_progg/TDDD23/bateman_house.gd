@@ -1,6 +1,8 @@
 extends Node2D
 
 var canTalkToPatrik = false
+var opened_shop = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -9,7 +11,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_pressed("talk_to_bateman") and canTalkToPatrik:
-		print("buy")
+		$shop.open_shop()
+		opened_shop = true
 
 
 func _on_leave_bateman_area_2d_body_entered(body):
@@ -27,6 +30,8 @@ func _on_leave_bateman_area_2d_body_exited(body):
 func _on_interact_with_patrik_area_2d_body_entered(body):
 	canTalkToPatrik = true
 
-
 func _on_interact_with_patrik_area_2d_body_exited(body):
 	canTalkToPatrik = false
+	if opened_shop:
+		$shop.close_shop()
+		opened_shop = false

@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-@export var speed = 40 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
 
 signal damage_taken
@@ -98,7 +97,7 @@ func _process(delta):
 			player_alive = false
 			global.player_attacking = false
 			$death_cooldown.start()
-			global.health = 100
+			global.health = 200
 			_state_machine.travel("die-ground")
 			moving = true
 		if not moving:
@@ -111,7 +110,7 @@ func _process(delta):
 		
 		if change_position:
 			if velocity.length() > 0:
-				velocity = velocity.normalized() * speed
+				velocity = velocity.normalized() * global.speed
 			position += velocity * delta
 			position = position.clamp(Vector2.ZERO, screen_size)
 			move_and_slide()

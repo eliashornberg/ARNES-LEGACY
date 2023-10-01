@@ -116,7 +116,7 @@ func enemy_attacked():
 	if player_in_attack_range and global.player_attacking and attacked_cooldown:
 		attacked_cooldown = false
 		$attacked_cooldown.start()
-		health -= 20
+		health -= global.templarDamage
 		_state_machine.travel("hit")
 		if health <= 0:
 			_state_machine.travel("death")

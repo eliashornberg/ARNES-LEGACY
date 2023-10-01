@@ -17,6 +17,9 @@ func _ready():
 		$HUD._start()
 		$HUD.show_wave()
 		$HUD.update_gold()
+		$HUD.update_attack()
+		$HUD.update_health()
+		$HUD.update_speed()
 		$templar.position.x = 568
 		$templar.position.y = 441
 

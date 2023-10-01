@@ -31,7 +31,13 @@ func update_gold():
 	$Money.text = "Cash: " + str(global.gold)
 	
 func update_health():
-	$Life.text = str(global.health) + " health"
+	$Life.text = str(global.health)
+	
+func update_speed():
+	$Speed.text = str(global.speed)
+	
+func update_attack():
+	$attack.text = str(global.templarDamage)
 	
 
 func wave_ended():

@@ -1,0 +1,281 @@
+[gd_scene load_steps=21 format=3 uid="uid://dl7ba7r55klph"]
+
+[ext_resource type="Script" path="res://shop.gd" id="1_erohn"]
+[ext_resource type="Texture2D" uid="uid://i2616j025ynk" path="res://gold.png" id="2_bbwup"]
+[ext_resource type="Texture2D" uid="uid://dbwp1f2tg4xw1" path="res://Item 3-1.png.png" id="3_jb1g8"]
+[ext_resource type="Texture2D" uid="uid://d4goplhmfbp2g" path="res://Unicorn's Evolving Swords_00.png" id="4_c6nra"]
+
+[sub_resource type="Animation" id="Animation_4ol7b"]
+resource_name = "TranformIn"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -800), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_e4j47"]
+resource_name = "TransformOut"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -800)]
+}
+
+[sub_resource type="Animation" id="Animation_48wh2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -800)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a7xyf"]
+_data = {
+"RESET": SubResource("Animation_48wh2"),
+"TranformIn": SubResource("Animation_4ol7b"),
+"TransformOut": SubResource("Animation_e4j47")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4c58"]
+atlas = ExtResource("2_bbwup")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jskgu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4c58")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcedm"]
+atlas = ExtResource("2_bbwup")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8fq3j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mcedm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rih8x"]
+atlas = ExtResource("2_bbwup")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t8j6i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rih8x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bsxr3"]
+atlas = ExtResource("2_bbwup")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g53qr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bsxr3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_771fk"]
+atlas = ExtResource("3_jb1g8")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gow3y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_771fk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ca4fp"]
+atlas = ExtResource("4_c6nra")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_drcx2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ca4fp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="shop" type="CanvasLayer"]
+offset = Vector2(0, -800)
+transform = Transform2D(1, 0, 0, 1, 0, -800)
+script = ExtResource("1_erohn")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 152.0
+offset_top = 112.0
+offset_right = 774.0
+offset_bottom = 721.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_a7xyf")
+}
+
+[node name="buySpeedButton" type="Button" parent="."]
+offset_left = 243.0
+offset_top = 502.0
+offset_right = 280.0
+offset_bottom = 533.0
+text = "buy"
+
+[node name="buyHealthButton" type="Button" parent="."]
+offset_left = 635.0
+offset_top = 501.0
+offset_right = 672.0
+offset_bottom = 534.0
+text = "buy
+"
+
+[node name="buyAttackButton" type="Button" parent="."]
+offset_left = 434.0
+offset_top = 503.0
+offset_right = 471.0
+offset_bottom = 534.0
+text = "buy
+"
+
+[node name="SpeedPrice" type="Label" parent="."]
+offset_left = 232.0
+offset_top = 382.0
+offset_right = 269.0
+offset_bottom = 417.0
+text = "100 "
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpeedPrice"]
+position = Vector2(54, 12)
+sprite_frames = SubResource("SpriteFrames_jskgu")
+
+[node name="AttackPrice" type="Label" parent="."]
+offset_left = 428.0
+offset_top = 386.0
+offset_right = 462.0
+offset_bottom = 438.0
+text = "200
+
+"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AttackPrice"]
+position = Vector2(52, 12)
+sprite_frames = SubResource("SpriteFrames_8fq3j")
+
+[node name="HealthPrice" type="Label" parent="."]
+offset_left = 633.0
+offset_top = 386.0
+offset_right = 661.0
+offset_bottom = 412.0
+text = "50
+"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HealthPrice"]
+position = Vector2(47, 10)
+sprite_frames = SubResource("SpriteFrames_t8j6i")
+
+[node name="GoldAmount" type="Label" parent="."]
+offset_left = 398.0
+offset_top = 257.0
+offset_right = 511.0
+offset_bottom = 283.0
+text = "You have: 0"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="GoldAmount"]
+position = Vector2(114, 10)
+sprite_frames = SubResource("SpriteFrames_g53qr")
+
+[node name="PatrikDialogue" type="Label" parent="."]
+offset_left = 172.0
+offset_top = 120.0
+offset_right = 749.0
+offset_bottom = 226.0
+text = "Welcome to my shop, my name is Patrik. Here you can buy stuff to defeat 
+those nasty monsters. This is the cheapest shop you can find so dont try to 
+negotiate the price Arne!"
+
+[node name="healthText" type="Label" parent="."]
+offset_left = 615.0
+offset_top = 433.0
+offset_right = 715.0
+offset_bottom = 473.0
+text = "+ 20"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="healthText"]
+position = Vector2(67, 21)
+scale = Vector2(1.67188, 1.42188)
+sprite_frames = SubResource("SpriteFrames_gow3y")
+
+[node name="attackText" type="Label" parent="."]
+offset_left = 430.0
+offset_top = 435.0
+offset_right = 470.0
+offset_bottom = 461.0
+text = "+ 20"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="attackText"]
+position = Vector2(59, 11)
+scale = Vector2(0.96875, 0.96875)
+sprite_frames = SubResource("SpriteFrames_drcx2")
+
+[node name="SpeedText" type="Label" parent="."]
+offset_left = 222.0
+offset_top = 433.0
+offset_right = 304.0
+offset_bottom = 459.0
+text = "+ 10 speed
+"
+
+[connection signal="pressed" from="buySpeedButton" to="." method="_on_buy_speed_button_pressed"]
+[connection signal="pressed" from="buyHealthButton" to="." method="_on_buy_health_button_pressed"]
+[connection signal="pressed" from="buyAttackButton" to="." method="_on_buy_attack_button_pressed"]

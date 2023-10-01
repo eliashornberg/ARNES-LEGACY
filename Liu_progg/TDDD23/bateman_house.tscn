@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bkavpx5lo70cs"]
+[gd_scene load_steps=18 format=3 uid="uid://bkavpx5lo70cs"]
 
 [ext_resource type="Script" path="res://bateman_house.gd" id="1_f4ce2"]
 [ext_resource type="Texture2D" uid="uid://sbsoka63nbkx" path="res://art/NinjaAdventure/Backgrounds/Tilesets/Interior/TilesetInterior.png" id="1_yj6sw"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bftpkoqatle1s" path="res://art/NinjaAdventure/Backgrounds/Tilesets/Interior/Elements.png" id="5_ml8gm"]
 [ext_resource type="PackedScene" uid="uid://c1t20b6i3b245" path="res://templar.tscn" id="7_bsgrq"]
 [ext_resource type="PackedScene" uid="uid://02bve1enhkb2" path="res://patrik.tscn" id="8_3r7co"]
+[ext_resource type="PackedScene" uid="uid://dl7ba7r55klph" path="res://shop.tscn" id="9_bqli7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vjjs6"]
 texture = ExtResource("1_yj6sw")
@@ -4050,6 +4051,8 @@ position = Vector2(325.333, 87.3333)
 [node name="interactWithPatrikCollisionshape2d" type="CollisionShape2D" parent="interactWithPatrikArea2d"]
 position = Vector2(326.667, 118.667)
 shape = SubResource("RectangleShape2D_oorwr")
+
+[node name="shop" parent="." instance=ExtResource("9_bqli7")]
 
 [connection signal="body_entered" from="leaveBatemanArea2d" to="." method="_on_leave_bateman_area_2d_body_entered"]
 [connection signal="body_exited" from="leaveBatemanArea2d" to="." method="_on_leave_bateman_area_2d_body_exited"]

@@ -603,7 +603,6 @@ graph_offset = Vector2(-395.399, -162.771)
 [node name="templar" type="CharacterBody2D" groups=["hero"]]
 position = Vector2(100, 100)
 script = ExtResource("1_45ydi")
-speed = 200
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_s86qm")
