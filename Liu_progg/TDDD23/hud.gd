@@ -13,7 +13,7 @@ func show_game_over():
 	
 	await $MessageTimer.timeout
 	
-	$Instruction.text = "Move with WASD, fight with O.\nKill all enemies!"
+	$Instruction.text = "Kill all enemies!"
 	
 	$Instruction.show()
 	
@@ -23,12 +23,13 @@ func show_game_over():
 func update_wave():
 	$StartWaveText.hide()
 	$Wave.text = "Wave " + str(global.wave)
+	$StartWaveText/SpaceAnimation.stop()
 	
 func show_wave():
 	$Wave.text = "Wave " + str(global.wave)
 	
 func update_gold():
-	$Money.text = "Cash: " + str(global.gold)
+	$Money.text = ": " + str(global.gold)
 	
 func update_health():
 	$Life.text = str(global.health)
@@ -42,6 +43,7 @@ func update_attack():
 
 func wave_ended():
 	$StartWaveText.show()
+	$StartWaveText/SpaceAnimation.play("press")
 
 
 func _on_message_timer_timeout():
@@ -51,3 +53,11 @@ func _on_message_timer_timeout():
 func _start():
 	$Instruction.hide()
 	start_game.emit()
+	
+func newGame():
+	$gameLost.hide()
+	
+func gameOver():
+	$gameLost.show()
+	$gameLost.text = "You lost! You got to wave: " + str(global.wave) + ".\n                  restart game."
+	$gameLost/SpaceAnimation.play("press")

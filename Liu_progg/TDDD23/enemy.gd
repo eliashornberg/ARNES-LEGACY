@@ -123,7 +123,7 @@ func enemy_attacked():
 			global.enemies -= 1
 	
 func attack():
-	if in_attack_range and attack_cooldown:
+	if in_attack_range and attack_cooldown and global.health > 0:
 		var attack = rng.randi() % 2
 		_state_machine.travel(attacks[attack])
 		attack_cooldown = false

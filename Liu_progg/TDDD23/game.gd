@@ -8,11 +8,15 @@ var wave_active = false
 var wave_timer_running = false
 var waves_timer = []
 var start = false
+var gameOver = false
+var show_restart_text = false
 
 @export var gold_scene: PackedScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$HUD.newGame()
+	$HUD.wave_ended()
 	if global.justEnteredWorld:
 		$HUD._start()
 		$HUD.show_wave()
@@ -26,23 +30,31 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if global.drop_gold:
-		global.drop_gold = false
-		add_gold(global.gold_amount, global.gold_pos)
-	if global.gold_amount_updated:
-		$HUD.update_gold()
-		global.gold_amount_updated = false
-	if global.game_started and not start:
-		$HUD._start()
-	if start:
-		if not wave_timer_running and global.enemies == 0 and wave_active:
-			end_wave()
-		if not wave_active:
+	if not gameOver:
+		if global.drop_gold:
+			global.drop_gold = false
+			add_gold(global.gold_amount, global.gold_pos)
+		if global.gold_amount_updated:
+			$HUD.update_gold()
+			global.gold_amount_updated = false
+		if global.game_started and not start:
+			$HUD._start()
+		if start:
+			if not wave_timer_running and global.enemies == 0 and wave_active:
+				end_wave()
+			if not wave_active:
+				if Input.is_action_pressed("StartWave"):
+					start_wave()
+			if spawn_timer and wave_active:
+				$Spawn_timer.start()
+				spawn_timer = false
+	else:
+		if show_restart_text:
+			$HUD.gameOver()
 			if Input.is_action_pressed("StartWave"):
-				start_wave()
-		if spawn_timer and wave_active:
-			$Spawn_timer.start()
-			spawn_timer = false
+				reset_globals()
+				get_tree().reload_current_scene()
+			
 		
 	
 
@@ -104,3 +116,38 @@ func add_gold(amount, gold_pos):
 
 func _on_templar_damage_taken():
 	$HUD.update_health()
+
+
+func _on_templar_game_over():
+	gameOver = true
+	$gameOverTimer.start()
+	
+
+
+func _on_game_over_timer_timeout():
+	show_restart_text = true
+	
+func reset_globals():
+	global.player_attacking = false
+	global.justEnteredBatemanHouse = false
+	global.justEnteredWorld = false
+	global.enemies = 0
+	global.wave = 0
+	global.game_started = false
+	global.gold = 0
+	global.drop_gold = false
+	global.gold_pos = Vector2.ZERO
+	global.gold_amount = 0
+	global.gold_amount_updated = false
+
+	global.health = 200
+	global.speed = 200
+	global.templarDamage = 20
+
+	global.speedPrice = 100
+	global.attackPrice = 100
+	global.healthPrice = 50
+
+	global.speedOffer = 50
+	global.attackOffer = 20
+	global.healthOffer = 40

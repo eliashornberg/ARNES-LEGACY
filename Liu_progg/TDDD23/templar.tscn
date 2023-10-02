@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://c1t20b6i3b245"]
+[gd_scene load_steps=61 format=3 uid="uid://c1t20b6i3b245"]
 
 [ext_resource type="Script" path="res://templar.gd" id="1_45ydi"]
 [ext_resource type="Texture2D" uid="uid://di16lg8vld62a" path="res://art/CharAni-Sheet4.png" id="2_s86qm"]
@@ -569,6 +569,10 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yqk3p"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_i8pu0"]
 states/Start/position = Vector2(-607, 48.3927)
 states/attack-down/node = SubResource("AnimationNodeAnimation_fsum1")
@@ -597,8 +601,8 @@ states/run-up/node = SubResource("AnimationNodeAnimation_0qbup")
 states/run-up/position = Vector2(115.702, -191.159)
 states/thanos-snapped/node = SubResource("AnimationNodeAnimation_l8dav")
 states/thanos-snapped/position = Vector2(632.202, 73.7498)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_qnh4g"), "idle", "run-down", SubResource("AnimationNodeStateMachineTransition_nsnrq"), "idle", "run-left", SubResource("AnimationNodeStateMachineTransition_fy8uc"), "idle", "run-up", SubResource("AnimationNodeStateMachineTransition_i8p4d"), "idle", "run-sword", SubResource("AnimationNodeStateMachineTransition_vk6es"), "run-left", "idle", SubResource("AnimationNodeStateMachineTransition_86tq8"), "run-up", "idle", SubResource("AnimationNodeStateMachineTransition_vi8ap"), "run-sword", "idle", SubResource("AnimationNodeStateMachineTransition_6xrlp"), "run-down", "idle", SubResource("AnimationNodeStateMachineTransition_bh0pv"), "attack-right", "idle", SubResource("AnimationNodeStateMachineTransition_ar1e5"), "roll-right", "idle", SubResource("AnimationNodeStateMachineTransition_1y4jq"), "thanos-snapped", "idle", SubResource("AnimationNodeStateMachineTransition_wkgdm"), "attack-left", "idle", SubResource("AnimationNodeStateMachineTransition_3y5me"), "damaged", "idle", SubResource("AnimationNodeStateMachineTransition_5a7kv"), "attack-up", "idle", SubResource("AnimationNodeStateMachineTransition_vaqjo"), "attack-down", "idle", SubResource("AnimationNodeStateMachineTransition_ffrhw")]
-graph_offset = Vector2(-395.399, -162.771)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_qnh4g"), "idle", "run-down", SubResource("AnimationNodeStateMachineTransition_nsnrq"), "idle", "run-left", SubResource("AnimationNodeStateMachineTransition_fy8uc"), "idle", "run-up", SubResource("AnimationNodeStateMachineTransition_i8p4d"), "idle", "run-sword", SubResource("AnimationNodeStateMachineTransition_vk6es"), "run-left", "idle", SubResource("AnimationNodeStateMachineTransition_86tq8"), "run-up", "idle", SubResource("AnimationNodeStateMachineTransition_vi8ap"), "run-sword", "idle", SubResource("AnimationNodeStateMachineTransition_6xrlp"), "run-down", "idle", SubResource("AnimationNodeStateMachineTransition_bh0pv"), "attack-right", "idle", SubResource("AnimationNodeStateMachineTransition_ar1e5"), "roll-right", "idle", SubResource("AnimationNodeStateMachineTransition_1y4jq"), "thanos-snapped", "idle", SubResource("AnimationNodeStateMachineTransition_wkgdm"), "attack-left", "idle", SubResource("AnimationNodeStateMachineTransition_3y5me"), "damaged", "idle", SubResource("AnimationNodeStateMachineTransition_5a7kv"), "attack-up", "idle", SubResource("AnimationNodeStateMachineTransition_vaqjo"), "attack-down", "idle", SubResource("AnimationNodeStateMachineTransition_ffrhw"), "die-ground", "End", SubResource("AnimationNodeStateMachineTransition_yqk3p")]
+graph_offset = Vector2(359.454, -97.5586)
 
 [node name="templar" type="CharacterBody2D" groups=["hero"]]
 position = Vector2(100, 100)
@@ -649,9 +653,6 @@ shape = SubResource("CapsuleShape2D_b0wul")
 tree_root = SubResource("AnimationNodeStateMachine_i8pu0")
 anim_player = NodePath("../AnimationPlayer")
 
-[node name="death_cooldown" type="Timer" parent="."]
-wait_time = 5.0
-
 [connection signal="body_entered" from="Sprite2D/swordhit-right" to="." method="_on_swordhitright_body_entered"]
 [connection signal="body_exited" from="Sprite2D/swordhit-right" to="." method="_on_swordhitright_body_exited"]
 [connection signal="body_entered" from="Sprite2D/swordhit-left" to="." method="_on_swordhitleft_body_entered"]
@@ -660,4 +661,3 @@ wait_time = 5.0
 [connection signal="body_exited" from="Sprite2D/swordhit-down" to="." method="_on_swordhitdown_body_exited"]
 [connection signal="body_entered" from="Sprite2D/swordhit-up" to="." method="_on_swordhitup_body_entered"]
 [connection signal="body_exited" from="Sprite2D/swordhit-up" to="." method="_on_swordhitup_body_exited"]
-[connection signal="timeout" from="death_cooldown" to="." method="_on_death_cooldown_timeout"]

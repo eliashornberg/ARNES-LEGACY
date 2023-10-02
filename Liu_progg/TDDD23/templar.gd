@@ -14,6 +14,7 @@ var enemy_in_attack_range = false
 var enemy_attack_cooldown = true
 var player_alive = true
 var hit_taken = false
+signal gameOver
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -31,6 +32,8 @@ func _process(delta):
 		var looking_right = false
 		var looking_up = false
 		var looking_down = true
+		if Input.is_action_pressed("StartWave") and not global.game_started:
+			global.game_started = true
 		if Input.is_action_pressed("down"):
 			velocity.y += 1
 			moving = true
@@ -65,7 +68,6 @@ func _process(delta):
 			_state_machine.travel("run-left")
 		if Input.is_action_pressed("attack"):
 			moving = true
-
 			if looking_right:
 				_state_machine.travel("attack-right")
 			else:
@@ -96,10 +98,9 @@ func _process(delta):
 		if global.health <= 0:
 			player_alive = false
 			global.player_attacking = false
-			$death_cooldown.start()
-			global.health = 200
 			_state_machine.travel("die-ground")
 			moving = true
+			gameOver.emit()
 		if not moving:
 			_state_machine.travel("idle")
 		else:
@@ -117,13 +118,12 @@ func _process(delta):
 		
 func enemy_attack(damage):
 	hit_taken = true
-	global.health -= damage
+	if not global.health - damage < 0:
+		global.health -= damage
+	else:
+		global.health = 0
 	_state_machine.travel("damaged")
 	damage_taken.emit()
-
-
-func _on_death_cooldown_timeout():
-	player_alive = true
 
 
 func _on_swordhitright_body_entered(body):

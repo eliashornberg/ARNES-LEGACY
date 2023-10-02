@@ -6965,9 +6965,14 @@ wait_time = 20.0
 
 [node name="HUD" parent="." instance=ExtResource("17_mcfed")]
 
+[node name="gameOverTimer" type="Timer" parent="."]
+wait_time = 2.0
+
 [connection signal="damage_taken" from="templar" to="." method="_on_templar_damage_taken"]
+[connection signal="gameOver" from="templar" to="." method="_on_templar_game_over"]
 [connection signal="timeout" from="Spawn_timer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="body_entered" from="batemanArea2d" to="." method="_on_bateman_area_2d_body_entered"]
 [connection signal="body_exited" from="batemanArea2d" to="." method="_on_bateman_area_2d_body_exited"]
 [connection signal="timeout" from="wave_timer" to="." method="_on_wave_timer_timeout"]
 [connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]
+[connection signal="timeout" from="gameOverTimer" to="." method="_on_game_over_timer_timeout"]
