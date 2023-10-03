@@ -4,18 +4,24 @@ extends Node2D
 
 @export var goblin_scene: PackedScene
 
+@export var boss_scene: PackedScene
+
+@export var gold_scene: PackedScene
+
 var spawn_timer = true
 var spawn_goblin_timer = true
 var spawn_freq = 10
-var goblin_spawn_freq = 5
+var goblin_spawn_freq = 55
 var wave_active = false
 var wave_timer_running = false
 var waves_timer = []
 var start = false
 var gameOver = false
 var show_restart_text = false
+var goblin_spawn_positions = [Vector2(983, 138), Vector2(185, 727)]
+var enemy_spawn_positions = [Vector2(85,192),Vector2(1048, 620)]
 
-@export var gold_scene: PackedScene
+var rng = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -49,9 +55,13 @@ func _process(delta):
 			if not wave_active:
 				if Input.is_action_pressed("StartWave"):
 					start_wave()
-			if spawn_timer and wave_active:
-				$Spawn_timer.start()
-				spawn_timer = false
+			if wave_active:
+				if spawn_timer:
+					$Spawn_timer.start()
+					spawn_timer = false
+				if spawn_goblin_timer:
+					$goblinSpawnTimer.start()
+					spawn_goblin_timer = false
 	else:
 		if show_restart_text:
 			$HUD.gameOver()
@@ -65,9 +75,15 @@ func _process(delta):
 func start_wave():
 	global.wave += 1
 	$HUD.update_wave()
-	$Spawn_timer.wait_time = spawn_freq/global.wave
-	$goblinSpawnTimer.wait_time = goblin_spawn_freq/global.wave
-	spawn_timer = true
+	if global.wave % 5 != 0:
+		$Spawn_timer.wait_time = spawn_freq/global.wave
+		$goblinSpawnTimer.wait_time = goblin_spawn_freq/global.wave
+		spawn_timer = true
+		spawn_goblin_timer = true
+	else:
+		var boss_amount = global.wave / 5
+		for n in boss_amount:
+			spawn_boss()
 	$wave_timer.start()
 	wave_timer_running = true
 	wave_active = true
@@ -81,24 +97,31 @@ func end_wave():
 func spawn_enemy():
 	global.enemies += 1
 	var enemy = enemy_scene.instantiate()
-	enemy.position = Vector2(85,190)
+	var enemy_pos = rng.randi() % 2
+	enemy.position = enemy_spawn_positions[enemy_pos]
 	add_child(enemy)
 
 
 func _on_spawn_timer_timeout():
 	spawn_enemy()
-	spawn_goblin()
 	spawn_timer = true
 	
 func spawn_goblin():
 	global.enemies += 1
 	var goblin = goblin_scene.instantiate()
-	goblin.position = Vector2(85,190)
+	var goblin_pos = rng.randi() % 2
+	goblin.position = goblin_spawn_positions[goblin_pos]
 	add_child(goblin)
 	
 func _on_goblin_spawn_timer_timeout():
 	spawn_goblin()
 	spawn_goblin_timer = true
+	
+func spawn_boss():
+	global.enemies += 1
+	var boss = boss_scene.instantiate()
+	boss.position = Vector2(85, 192)
+	add_child(boss)
 
 
 func _on_bateman_area_2d_body_entered(body):

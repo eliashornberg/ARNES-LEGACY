@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://c1t20b6i3b245"]
+[gd_scene load_steps=67 format=3 uid="uid://c1t20b6i3b245"]
 
 [ext_resource type="Script" path="res://templar.gd" id="1_45ydi"]
 [ext_resource type="Texture2D" uid="uid://di16lg8vld62a" path="res://art/CharAni-Sheet4.png" id="2_s86qm"]
@@ -573,26 +573,38 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_up7bp"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d2jpr"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eheyf"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_001vw"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tbkd6"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lf3b7"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_i8pu0"]
 states/Start/position = Vector2(-607, 48.3927)
 states/attack-down/node = SubResource("AnimationNodeAnimation_fsum1")
 states/attack-down/position = Vector2(223.501, -71.4958)
 states/attack-left/node = SubResource("AnimationNodeAnimation_3se45")
-states/attack-left/position = Vector2(-483.798, -191.409)
+states/attack-left/position = Vector2(-482.798, -227.409)
 states/attack-right/node = SubResource("AnimationNodeAnimation_v4nu6")
 states/attack-right/position = Vector2(456.702, 27.8408)
 states/attack-up/node = SubResource("AnimationNodeAnimation_4ji22")
 states/attack-up/position = Vector2(252.401, -20.7708)
 states/damaged/node = SubResource("AnimationNodeAnimation_1vk4y")
-states/damaged/position = Vector2(241.702, -122.081)
+states/damaged/position = Vector2(364.702, -165.357)
 states/die-ground/node = SubResource("AnimationNodeAnimation_fc003")
-states/die-ground/position = Vector2(371.202, -62.581)
+states/die-ground/position = Vector2(680.202, -77.081)
 states/idle/node = SubResource("AnimationNodeAnimation_23nck")
 states/idle/position = Vector2(-436.298, 49.1167)
 states/roll-right/node = SubResource("AnimationNodeAnimation_k3r7h")
-states/roll-right/position = Vector2(414.202, 337.75)
+states/roll-right/position = Vector2(512.702, 151.75)
 states/run-down/node = SubResource("AnimationNodeAnimation_ntlqu")
-states/run-down/position = Vector2(-233.798, 347.841)
+states/run-down/position = Vector2(-132.298, 211.048)
 states/run-left/node = SubResource("AnimationNodeAnimation_dld7v")
 states/run-left/position = Vector2(-289.298, -166.633)
 states/run-sword/node = SubResource("AnimationNodeAnimation_554lf")
@@ -601,8 +613,8 @@ states/run-up/node = SubResource("AnimationNodeAnimation_0qbup")
 states/run-up/position = Vector2(115.702, -191.159)
 states/thanos-snapped/node = SubResource("AnimationNodeAnimation_l8dav")
 states/thanos-snapped/position = Vector2(632.202, 73.7498)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_qnh4g"), "idle", "run-down", SubResource("AnimationNodeStateMachineTransition_nsnrq"), "idle", "run-left", SubResource("AnimationNodeStateMachineTransition_fy8uc"), "idle", "run-up", SubResource("AnimationNodeStateMachineTransition_i8p4d"), "idle", "run-sword", SubResource("AnimationNodeStateMachineTransition_vk6es"), "run-left", "idle", SubResource("AnimationNodeStateMachineTransition_86tq8"), "run-up", "idle", SubResource("AnimationNodeStateMachineTransition_vi8ap"), "run-sword", "idle", SubResource("AnimationNodeStateMachineTransition_6xrlp"), "run-down", "idle", SubResource("AnimationNodeStateMachineTransition_bh0pv"), "attack-right", "idle", SubResource("AnimationNodeStateMachineTransition_ar1e5"), "roll-right", "idle", SubResource("AnimationNodeStateMachineTransition_1y4jq"), "thanos-snapped", "idle", SubResource("AnimationNodeStateMachineTransition_wkgdm"), "attack-left", "idle", SubResource("AnimationNodeStateMachineTransition_3y5me"), "damaged", "idle", SubResource("AnimationNodeStateMachineTransition_5a7kv"), "attack-up", "idle", SubResource("AnimationNodeStateMachineTransition_vaqjo"), "attack-down", "idle", SubResource("AnimationNodeStateMachineTransition_ffrhw"), "die-ground", "End", SubResource("AnimationNodeStateMachineTransition_yqk3p")]
-graph_offset = Vector2(359.454, -97.5586)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_qnh4g"), "idle", "run-down", SubResource("AnimationNodeStateMachineTransition_nsnrq"), "idle", "run-left", SubResource("AnimationNodeStateMachineTransition_fy8uc"), "idle", "run-up", SubResource("AnimationNodeStateMachineTransition_i8p4d"), "idle", "run-sword", SubResource("AnimationNodeStateMachineTransition_vk6es"), "run-left", "idle", SubResource("AnimationNodeStateMachineTransition_86tq8"), "run-up", "idle", SubResource("AnimationNodeStateMachineTransition_vi8ap"), "run-sword", "idle", SubResource("AnimationNodeStateMachineTransition_6xrlp"), "run-down", "idle", SubResource("AnimationNodeStateMachineTransition_bh0pv"), "attack-right", "idle", SubResource("AnimationNodeStateMachineTransition_ar1e5"), "roll-right", "idle", SubResource("AnimationNodeStateMachineTransition_1y4jq"), "thanos-snapped", "idle", SubResource("AnimationNodeStateMachineTransition_wkgdm"), "attack-left", "idle", SubResource("AnimationNodeStateMachineTransition_3y5me"), "damaged", "idle", SubResource("AnimationNodeStateMachineTransition_5a7kv"), "attack-up", "idle", SubResource("AnimationNodeStateMachineTransition_vaqjo"), "attack-down", "idle", SubResource("AnimationNodeStateMachineTransition_ffrhw"), "die-ground", "End", SubResource("AnimationNodeStateMachineTransition_yqk3p"), "attack-down", "damaged", SubResource("AnimationNodeStateMachineTransition_up7bp"), "attack-left", "damaged", SubResource("AnimationNodeStateMachineTransition_d2jpr"), "attack-up", "damaged", SubResource("AnimationNodeStateMachineTransition_eheyf"), "attack-right", "damaged", SubResource("AnimationNodeStateMachineTransition_001vw"), "thanos-snapped", "damaged", SubResource("AnimationNodeStateMachineTransition_tbkd6"), "roll-right", "damaged", SubResource("AnimationNodeStateMachineTransition_lf3b7")]
+graph_offset = Vector2(-452.368, -269.721)
 
 [node name="templar" type="CharacterBody2D" groups=["hero"]]
 position = Vector2(100, 100)

@@ -3,10 +3,6 @@
 [ext_resource type="Script" path="res://gold.gd" id="1_dxug2"]
 [ext_resource type="Texture2D" uid="uid://i2616j025ynk" path="res://gold.png" id="2_1q1p0"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_m07ge"]
-atlas = ExtResource("2_1q1p0")
-region = Rect2(64, 64, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_7x4lk"]
 atlas = ExtResource("2_1q1p0")
 region = Rect2(0, 32, 32, 32)
@@ -23,20 +19,16 @@ region = Rect2(96, 32, 32, 32)
 atlas = ExtResource("2_1q1p0")
 region = Rect2(64, 32, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_m07ge"]
+atlas = ExtResource("2_1q1p0")
+region = Rect2(64, 64, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_rhymb"]
 atlas = ExtResource("2_1q1p0")
 region = Rect2(0, 64, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2onc6"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m07ge")
-}],
-"loop": true,
-"name": &"100gold",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7x4lk")
@@ -71,6 +63,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_m07ge")
+}],
+"loop": true,
+"name": &"500gold",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_rhymb")
 }],
 "loop": true,
@@ -88,7 +88,7 @@ script = ExtResource("1_dxug2")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_2onc6")
-animation = &"30gold"
+animation = &"500gold"
 
 [node name="pickUpCoinRange" type="Area2D" parent="."]
 

@@ -364,7 +364,7 @@ radius = 6.25
 height = 57.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_466ha"]
-radius = 848.009
+radius = 9384.32
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lui7n"]
 radius = 34.0
@@ -735,7 +735,7 @@ states/idle/position = Vector2(315.2, 99.3087)
 states/walk/node = SubResource("AnimationNodeAnimation_ijwqo")
 states/walk/position = Vector2(403.2, 32.1175)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_m00bw"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_mrtiy"), "death", "End", SubResource("AnimationNodeStateMachineTransition_1plr6"), "attack", "hit", SubResource("AnimationNodeStateMachineTransition_8ntbd"), "attack2", "hit", SubResource("AnimationNodeStateMachineTransition_l5r5c"), "walk", "hit", SubResource("AnimationNodeStateMachineTransition_qxw4x"), "hit", "walk", SubResource("AnimationNodeStateMachineTransition_3fqeb"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_5qic3"), "attack2", "walk", SubResource("AnimationNodeStateMachineTransition_8ic7j")]
-graph_offset = Vector2(-21.4803, 3.21002)
+graph_offset = Vector2(92.4595, 10.8975)
 
 [node name="enemy" type="CharacterBody2D" groups=["enemies"]]
 position = Vector2(244, 190)
@@ -781,14 +781,12 @@ shape = SubResource("CapsuleShape2D_23ok1")
 [node name="detectionArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detectionArea"]
-visible = false
 position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_466ha")
 
 [node name="enemy_hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_hitbox"]
-visible = false
 shape = SubResource("CircleShape2D_lui7n")
 
 [node name="attacked_cooldown" type="Timer" parent="."]

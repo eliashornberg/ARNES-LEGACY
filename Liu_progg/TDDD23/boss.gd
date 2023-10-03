@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 @export var speed = 1 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
-var attacks = ["attack1", "attack2"]
 
 @onready var _animatedSprite2d = $AnimatedSprite2D
 
@@ -12,31 +11,28 @@ var attacks = ["attack1", "attack2"]
 
 @onready var _state_machine = _animation_tree.get("parameters/playback")
 
-var rng = RandomNumberGenerator.new()
-
 var switch = 0
 var flipped = false
 var chase = false
 var player = null
-var health = 200
+var health = 300
 var player_in_attack_range = false
 var attacked_cooldown = true
 var enemy_dead = false
 var in_attack_range = false
 var attack_cooldown = true
-var damage = 30
-var heavy_damage = 40
+var damage = 60
 
 func _ready():
 	screen_size = get_viewport_rect().size
 	_animation_tree.active = true
-	_state_machine.travel("idle")
+	_state_machine.travel("fly")
 	
 func _process(delta):
 	if _state_machine.get_current_node() == "End":
 		global.drop_gold = true
 		global.gold_pos = position
-		global.gold_amount = 50
+		global.gold_amount = 500
 		self.queue_free()
 	else:
 		var movement = 0
@@ -59,49 +55,29 @@ func _on_detection_area_body_entered(body):
 	if body.is_in_group("hero"):
 		chase = true
 		player = body
-		_state_machine.travel("run")
+		_state_machine.travel("fly")
 
 
 func _on_detection_area_body_exited(body):
 	if body.is_in_group("hero"):
 		chase = false
 		player = null
-		_state_machine.travel("idle")
-		
-func _on_attack_1_right_body_entered(body):
+		_state_machine.travel("fly")
+
+
+func _on_attack_1_body_entered(body):
 	if body.is_in_group("hero") and not flipped:
-		print("right")
 		body.enemy_attack(damage)
 
 func _on_attack_1_left_body_entered(body):
 	if body.is_in_group("hero") and flipped:
-		print("left")
 		body.enemy_attack(damage)
-		
-func _on_attack_2_right_body_entered(body):
-	if body.is_in_group("hero") and not flipped:
-		print("2right")
-		body.enemy_attack(heavy_damage)
-		
-func _on_attack_2_left_body_entered(body):
-	if body.is_in_group("hero") and flipped:
-		print("2left")
-		body.enemy_attack(heavy_damage)
-
-
-func _on_hitbox_body_entered(body):
-	if body.is_in_group("hero"):
-		player_in_attack_range = true
-
-func _on_hitbox_body_exited(body):
-	if body.is_in_group("hero"):
-		player_in_attack_range = false
 
 
 func _on_attack_range_body_entered(body):
 	if body.is_in_group("hero"):
 		in_attack_range = true
-
+		
 func _on_attack_range_body_exited(body):
 	if body.is_in_group("hero"):
 		in_attack_range = false
@@ -120,14 +96,22 @@ func enemy_attacked():
 		attacked_cooldown = false
 		$attacked_cooldown.start()
 		health -= global.templarDamage
-		_state_machine.travel("take_hit")
 		if health <= 0:
 			_state_machine.travel("death")
 			global.enemies -= 1
 	
 func attack():
 	if in_attack_range and attack_cooldown and global.health > 0:
-		var attack = rng.randi() % 2
-		_state_machine.travel(attacks[attack])
+		_state_machine.travel("attack")
 		attack_cooldown = false
 		$attack_cooldown.start()
+
+
+func _on_boss_hitbox_body_entered(body):
+	if body.is_in_group("hero"):
+		player_in_attack_range = true
+
+
+func _on_boss_hitbox_body_exited(body):
+	if body.is_in_group("hero"):
+		player_in_attack_range = false
