@@ -20,6 +20,7 @@ var gameOver = false
 var show_restart_text = false
 var goblin_spawn_positions = [Vector2(983, 138), Vector2(185, 727)]
 var enemy_spawn_positions = [Vector2(85,192),Vector2(1048, 620)]
+var boss_spawn_positions = [Vector2(571, 53), Vector2(575, 741), Vector2(1130, 419), Vector2(38, 417)]
 
 var rng = RandomNumberGenerator.new()
 
@@ -83,7 +84,8 @@ func start_wave():
 	else:
 		var boss_amount = global.wave / 5
 		for n in boss_amount:
-			spawn_boss()
+			var boss_pos = boss_spawn_positions[n % 4]
+			spawn_boss(boss_pos)
 	$wave_timer.start()
 	wave_timer_running = true
 	wave_active = true
@@ -117,10 +119,10 @@ func _on_goblin_spawn_timer_timeout():
 	spawn_goblin()
 	spawn_goblin_timer = true
 	
-func spawn_boss():
+func spawn_boss(boss_pos):
 	global.enemies += 1
 	var boss = boss_scene.instantiate()
-	boss.position = Vector2(85, 192)
+	boss.position = boss_pos
 	add_child(boss)
 
 

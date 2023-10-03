@@ -22,6 +22,7 @@ var enemy_dead = false
 var in_attack_range = false
 var attack_cooldown = true
 var damage = 60
+var dead = false
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -96,7 +97,9 @@ func enemy_attacked():
 		attacked_cooldown = false
 		$attacked_cooldown.start()
 		health -= global.templarDamage
-		if health <= 0:
+		_state_machine.travel("hit")
+		if health <= 0 and not dead:
+			dead = true
 			_state_machine.travel("death")
 			global.enemies -= 1
 	
