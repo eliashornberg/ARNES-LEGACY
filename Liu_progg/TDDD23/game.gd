@@ -2,8 +2,12 @@ extends Node2D
 
 @export var enemy_scene: PackedScene
 
+@export var goblin_scene: PackedScene
+
 var spawn_timer = true
+var spawn_goblin_timer = true
 var spawn_freq = 10
+var goblin_spawn_freq = 5
 var wave_active = false
 var wave_timer_running = false
 var waves_timer = []
@@ -62,6 +66,7 @@ func start_wave():
 	global.wave += 1
 	$HUD.update_wave()
 	$Spawn_timer.wait_time = spawn_freq/global.wave
+	$goblinSpawnTimer.wait_time = goblin_spawn_freq/global.wave
 	spawn_timer = true
 	$wave_timer.start()
 	wave_timer_running = true
@@ -82,7 +87,18 @@ func spawn_enemy():
 
 func _on_spawn_timer_timeout():
 	spawn_enemy()
+	spawn_goblin()
 	spawn_timer = true
+	
+func spawn_goblin():
+	global.enemies += 1
+	var goblin = goblin_scene.instantiate()
+	goblin.position = Vector2(85,190)
+	add_child(goblin)
+	
+func _on_goblin_spawn_timer_timeout():
+	spawn_goblin()
+	spawn_goblin_timer = true
 
 
 func _on_bateman_area_2d_body_entered(body):
@@ -99,7 +115,9 @@ func _on_bateman_area_2d_body_exited(body):
 
 func _on_wave_timer_timeout():
 	$Spawn_timer.stop()
+	$goblinSpawnTimer.stop()
 	spawn_timer = false
+	spawn_goblin_timer = false
 	wave_timer_running = false
 	
 

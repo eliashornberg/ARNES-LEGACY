@@ -735,7 +735,7 @@ states/idle/position = Vector2(315.2, 99.3087)
 states/walk/node = SubResource("AnimationNodeAnimation_ijwqo")
 states/walk/position = Vector2(403.2, 32.1175)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_m00bw"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_mrtiy"), "death", "End", SubResource("AnimationNodeStateMachineTransition_1plr6"), "attack", "hit", SubResource("AnimationNodeStateMachineTransition_8ntbd"), "attack2", "hit", SubResource("AnimationNodeStateMachineTransition_l5r5c"), "walk", "hit", SubResource("AnimationNodeStateMachineTransition_qxw4x"), "hit", "walk", SubResource("AnimationNodeStateMachineTransition_3fqeb"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_5qic3"), "attack2", "walk", SubResource("AnimationNodeStateMachineTransition_8ic7j")]
-graph_offset = Vector2(291.855, -5.72251)
+graph_offset = Vector2(-21.4803, 3.21002)
 
 [node name="enemy" type="CharacterBody2D" groups=["enemies"]]
 position = Vector2(244, 190)
@@ -747,7 +747,6 @@ sprite_frames = SubResource("SpriteFrames_0qxh7")
 animation = &"attack"
 
 [node name="attack1" type="Area2D" parent="AnimatedSprite2D"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/attack1"]
 position = Vector2(40, -5)
@@ -762,7 +761,6 @@ shape = SubResource("RectangleShape2D_m0o45")
 disabled = true
 
 [node name="attack1-left" type="Area2D" parent="AnimatedSprite2D"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/attack1-left"]
 position = Vector2(-33, -5)
