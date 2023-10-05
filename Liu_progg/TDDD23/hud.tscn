@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dygc6hvpoqsr1"]
+[gd_scene load_steps=23 format=3 uid="uid://dygc6hvpoqsr1"]
 
 [ext_resource type="Script" path="res://hud.gd" id="1_me20i"]
 [ext_resource type="FontFile" uid="uid://b1fcjres08u3w" path="res://Chomsky.otf" id="1_nonwh"]
@@ -36,6 +36,43 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xtc1s"]
+atlas = ExtResource("5_86fcq")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0e0lk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xtc1s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6pph"]
+atlas = ExtResource("8_034p4")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jkxls"]
+atlas = ExtResource("8_034p4")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_31m5y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r6pph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jkxls")
+}],
+"loop": true,
+"name": &"press",
 "speed": 5.0
 }]
 
@@ -147,6 +184,18 @@ theme_override_fonts/font = ExtResource("1_nonwh")
 theme_override_font_sizes/font_size = 120
 text = "Kill all enemies!"
 autowrap_mode = 2
+
+[node name="sword" type="AnimatedSprite2D" parent="Instruction"]
+position = Vector2(312.75, 193.75)
+scale = Vector2(4.04688, 4.54687)
+sprite_frames = SubResource("SpriteFrames_0e0lk")
+frame_progress = 0.267576
+
+[node name="O_key" type="AnimatedSprite2D" parent="Instruction"]
+position = Vector2(472.409, 203.323)
+scale = Vector2(-4.88636, 4.51129)
+sprite_frames = SubResource("SpriteFrames_31m5y")
+animation = &"press"
 
 [node name="MessageTimer" type="Timer" parent="."]
 wait_time = 2.0

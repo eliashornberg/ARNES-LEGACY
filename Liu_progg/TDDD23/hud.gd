@@ -2,6 +2,10 @@ extends CanvasLayer
 
 signal start_game
 
+func _ready():
+	$Instruction/sword.play("default")
+	$Instruction/O_key.play("press")
+
 func show_message(text):
 	$Instruction.text = text
 	$Instruction.show()
@@ -16,6 +20,9 @@ func show_game_over():
 	$Instruction.text = "Kill all enemies!"
 	
 	$Instruction.show()
+	
+	$Instruction/sword.play("default")
+	$Instruction/O_key.play("press")
 	
 	await get_tree().create_timer(1.0).timeout
 	$Button.show()
@@ -48,10 +55,14 @@ func wave_ended():
 
 func _on_message_timer_timeout():
 	$Instruction.hide()
+	$Instruction/sword.stop()
+	$Instruction/O_key.stop()
 
 
 func _start():
 	$Instruction.hide()
+	$Instruction/sword.stop()
+	$Instruction/O_key.stop()
 	start_game.emit()
 	
 func newGame():
