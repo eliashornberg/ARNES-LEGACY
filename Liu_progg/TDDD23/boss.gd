@@ -32,7 +32,7 @@ func _ready():
 func _process(delta):
 	if _state_machine.get_current_node() != "attack" and attacking:
 		attacking = false
-	if _state_machine.get_current_node() == "End":
+	if _state_machine.get_current_node() != "death" and dead:
 		global.drop_gold = true
 		global.gold_pos = position
 		global.gold_amount = 500
@@ -51,7 +51,7 @@ func _process(delta):
 				flipped = false
 				_animatedSprite2d.flip_h = false
 			position += movement
-			move_and_slide()
+			move_and_collide(movement * delta)
 
 
 func _on_detection_area_body_entered(body):
@@ -99,13 +99,13 @@ func enemy_attacked():
 		attacked_cooldown = false
 		$attacked_cooldown.start()
 		health -= global.templarDamage
-		if not attacking:
-			_state_machine.travel("hit")
 		if health <= 0 and not dead:
 			dead = true
 			_state_machine.travel("death")
 			global.enemies -= 1
-			print(position, ": enemies: ", global.enemies)
+		else:
+			if not attacking:
+				_state_machine.travel("hit")
 	
 func attack():
 	if in_attack_range and attack_cooldown and global.health > 0:

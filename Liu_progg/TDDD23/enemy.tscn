@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://x3tohfiet0f4"]
+[gd_scene load_steps=89 format=3 uid="uid://x3tohfiet0f4"]
 
 [ext_resource type="Texture2D" uid="uid://dyelis5c0acfi" path="res://art/Skeleton/Skeleton/Idle.png" id="1_1wn3b"]
 [ext_resource type="Texture2D" uid="uid://b58jcc52ch1u3" path="res://art/Skeleton/Skeleton/Attack.png" id="1_kmv1e"]
@@ -721,6 +721,14 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ejfcr"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_quxcl"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ul2a8"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v6p2x"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_08inn"]
 states/attack/node = SubResource("AnimationNodeAnimation_rwact")
 states/attack/position = Vector2(611.7, 110.118)
@@ -734,8 +742,8 @@ states/idle/node = SubResource("AnimationNodeAnimation_1mig6")
 states/idle/position = Vector2(315.2, 99.3087)
 states/walk/node = SubResource("AnimationNodeAnimation_ijwqo")
 states/walk/position = Vector2(403.2, 32.1175)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_m00bw"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_mrtiy"), "death", "End", SubResource("AnimationNodeStateMachineTransition_1plr6"), "attack", "hit", SubResource("AnimationNodeStateMachineTransition_8ntbd"), "attack2", "hit", SubResource("AnimationNodeStateMachineTransition_l5r5c"), "walk", "hit", SubResource("AnimationNodeStateMachineTransition_qxw4x"), "hit", "walk", SubResource("AnimationNodeStateMachineTransition_3fqeb"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_5qic3"), "attack2", "walk", SubResource("AnimationNodeStateMachineTransition_8ic7j")]
-graph_offset = Vector2(92.4595, 10.8975)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_m00bw"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_mrtiy"), "death", "End", SubResource("AnimationNodeStateMachineTransition_1plr6"), "attack", "hit", SubResource("AnimationNodeStateMachineTransition_8ntbd"), "attack2", "hit", SubResource("AnimationNodeStateMachineTransition_l5r5c"), "walk", "hit", SubResource("AnimationNodeStateMachineTransition_qxw4x"), "hit", "walk", SubResource("AnimationNodeStateMachineTransition_3fqeb"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_5qic3"), "attack2", "walk", SubResource("AnimationNodeStateMachineTransition_8ic7j"), "attack", "death", SubResource("AnimationNodeStateMachineTransition_ejfcr"), "attack2", "death", SubResource("AnimationNodeStateMachineTransition_quxcl"), "hit", "death", SubResource("AnimationNodeStateMachineTransition_ul2a8"), "walk", "death", SubResource("AnimationNodeStateMachineTransition_v6p2x")]
+graph_offset = Vector2(214.323, -30.7875)
 
 [node name="enemy" type="CharacterBody2D" groups=["enemies"]]
 position = Vector2(244, 190)

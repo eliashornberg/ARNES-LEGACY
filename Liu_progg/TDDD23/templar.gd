@@ -116,7 +116,7 @@ func _process(delta):
 				velocity = velocity.normalized() * global.speed
 			position += velocity * delta
 			position = position.clamp(Vector2.ZERO, screen_size)
-			move_and_slide()
+			move_and_collide(velocity*delta)
 		
 func enemy_attack(damage):
 	hit_taken = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://dwet3er8uwyi7"]
+[gd_scene load_steps=82 format=3 uid="uid://dwet3er8uwyi7"]
 
 [ext_resource type="Script" path="res://boss.gd" id="1_q8app"]
 [ext_resource type="Texture2D" uid="uid://gfttwvexiqmm" path="res://art/Undead executioner puppet/png/attacking.png" id="2_pl51j"]
@@ -657,6 +657,12 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rfvdp"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2ubb3"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jfk2d"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ikmoh"]
 states/Start/position = Vector2(166, 99.5)
 states/attack/node = SubResource("AnimationNodeAnimation_7ak75")
@@ -667,8 +673,8 @@ states/fly/node = SubResource("AnimationNodeAnimation_csjom")
 states/fly/position = Vector2(344.5, 93.5)
 states/hit/node = SubResource("AnimationNodeAnimation_0pgcv")
 states/hit/position = Vector2(458.637, -28.84)
-transitions = ["Start", "fly", SubResource("AnimationNodeStateMachineTransition_0oxdb"), "death", "End", SubResource("AnimationNodeStateMachineTransition_gnarl"), "attack", "fly", SubResource("AnimationNodeStateMachineTransition_p4lte"), "hit", "fly", SubResource("AnimationNodeStateMachineTransition_d5dju")]
-graph_offset = Vector2(42.7275, -104.94)
+transitions = ["Start", "fly", SubResource("AnimationNodeStateMachineTransition_0oxdb"), "death", "End", SubResource("AnimationNodeStateMachineTransition_gnarl"), "attack", "fly", SubResource("AnimationNodeStateMachineTransition_p4lte"), "hit", "fly", SubResource("AnimationNodeStateMachineTransition_d5dju"), "attack", "death", SubResource("AnimationNodeStateMachineTransition_rfvdp"), "hit", "death", SubResource("AnimationNodeStateMachineTransition_2ubb3"), "fly", "death", SubResource("AnimationNodeStateMachineTransition_jfk2d")]
+graph_offset = Vector2(300.728, 18.585)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ymgrw"]
 radius = 12.0

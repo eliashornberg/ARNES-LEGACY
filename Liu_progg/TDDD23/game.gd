@@ -83,6 +83,8 @@ func start_wave():
 		spawn_timer = true
 		spawn_goblin_timer = true
 	else:
+		spawn_timer = false
+		spawn_goblin_timer = false
 		var boss_amount = global.wave / 5
 		for n in boss_amount:
 			var boss_pos = boss_spawn_positions[n % 4]
