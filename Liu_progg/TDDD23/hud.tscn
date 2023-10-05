@@ -189,7 +189,7 @@ autowrap_mode = 2
 position = Vector2(312.75, 193.75)
 scale = Vector2(4.04688, 4.54687)
 sprite_frames = SubResource("SpriteFrames_0e0lk")
-frame_progress = 0.267576
+frame_progress = 0.756135
 
 [node name="O_key" type="AnimatedSprite2D" parent="Instruction"]
 position = Vector2(472.409, 203.323)
