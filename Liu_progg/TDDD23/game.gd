@@ -75,6 +75,7 @@ func _process(delta):
 
 func start_wave():
 	global.wave += 1
+	global.enemies = 0
 	$HUD.update_wave()
 	if global.wave % 5 != 0:
 		$Spawn_timer.wait_time = spawn_freq/global.wave

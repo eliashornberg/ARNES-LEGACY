@@ -21,7 +21,6 @@ var player = null
 var health = 200
 var player_in_attack_range = false
 var attacked_cooldown = true
-var enemy_dead = false
 var in_attack_range = false
 var attack_cooldown = true
 var damage = 30
@@ -41,7 +40,7 @@ func _process(delta):
 		self.queue_free()
 	else:
 		var movement = 0
-		if chase and not enemy_dead:
+		if chase and not dead:
 			enemy_attacked()
 			attack()
 			movement = ((player.position - position)).normalized() * speed
@@ -71,22 +70,18 @@ func _on_detection_area_body_exited(body):
 		
 func _on_attack_1_right_body_entered(body):
 	if body.is_in_group("hero") and not flipped:
-		print("right")
 		body.enemy_attack(damage)
 
 func _on_attack_1_left_body_entered(body):
 	if body.is_in_group("hero") and flipped:
-		print("left")
 		body.enemy_attack(damage)
 		
 func _on_attack_2_right_body_entered(body):
 	if body.is_in_group("hero") and not flipped:
-		print("2right")
 		body.enemy_attack(heavy_damage)
 		
 func _on_attack_2_left_body_entered(body):
 	if body.is_in_group("hero") and flipped:
-		print("2left")
 		body.enemy_attack(heavy_damage)
 
 
@@ -126,6 +121,7 @@ func enemy_attacked():
 			dead = true
 			_state_machine.travel("death")
 			global.enemies -= 1
+			print(position, ": enemies: ", global.enemies)
 	
 func attack():
 	if in_attack_range and attack_cooldown and global.health > 0:

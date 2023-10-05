@@ -18,11 +18,11 @@ var player = null
 var health = 300
 var player_in_attack_range = false
 var attacked_cooldown = true
-var enemy_dead = false
 var in_attack_range = false
 var attack_cooldown = true
 var damage = 60
 var dead = false
+var attacking = false
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -30,6 +30,8 @@ func _ready():
 	_state_machine.travel("fly")
 	
 func _process(delta):
+	if _state_machine.get_current_node() != "attack" and attacking:
+		attacking = false
 	if _state_machine.get_current_node() == "End":
 		global.drop_gold = true
 		global.gold_pos = position
@@ -37,7 +39,7 @@ func _process(delta):
 		self.queue_free()
 	else:
 		var movement = 0
-		if chase and not enemy_dead:
+		if chase and not dead:
 			enemy_attacked()
 			attack()
 			movement = ((player.position - position)).normalized() * speed
@@ -97,14 +99,17 @@ func enemy_attacked():
 		attacked_cooldown = false
 		$attacked_cooldown.start()
 		health -= global.templarDamage
-		_state_machine.travel("hit")
+		if not attacking:
+			_state_machine.travel("hit")
 		if health <= 0 and not dead:
 			dead = true
 			_state_machine.travel("death")
 			global.enemies -= 1
+			print(position, ": enemies: ", global.enemies)
 	
 func attack():
 	if in_attack_range and attack_cooldown and global.health > 0:
+		attacking = true
 		_state_machine.travel("attack")
 		attack_cooldown = false
 		$attack_cooldown.start()

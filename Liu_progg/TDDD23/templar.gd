@@ -22,6 +22,8 @@ func _ready():
 	_state_machine.travel("idle")
 	
 func _process(delta):
+	if _state_machine.get_current_node() != "attack-up" and _state_machine.get_current_node() != "attack-left" and _state_machine.get_current_node() != "attack-down" and _state_machine.get_current_node() != "attack-right":
+		global.player_attacking = false
 	var velocity = Vector2() # The player's movement vector.
 	if player_alive:
 		var moving = false
@@ -104,7 +106,7 @@ func _process(delta):
 		if not moving:
 			_state_machine.travel("idle")
 		else:
-			if not global.game_started:
+			if not global.game_started and player_alive:
 				global.game_started = true
 		
 	
