@@ -82,7 +82,6 @@ func start_wave():
 			$Spawn_timer.wait_time = spawn_freq/global.wave
 		else:
 			$Spawn_timer.wait_time = 1
-		print($Spawn_timer.wait_time)
 		$goblinSpawnTimer.wait_time = goblin_spawn_freq/global.wave
 		spawn_timer = true
 		spawn_goblin_timer = true
@@ -197,13 +196,9 @@ func reset_globals():
 	global.gold_amount_updated = false
 
 	global.health = 200
-	global.speed = 200
+	global.speed = 150
 	global.templarDamage = 20
 
 	global.speedPrice = 100
 	global.attackPrice = 100
 	global.healthPrice = 50
-
-	global.speedOffer = 50
-	global.attackOffer = 20
-	global.healthOffer = 40
