@@ -40,9 +40,10 @@ func _process(delta):
 	
 func open_shop():
 	animations.play("TranformIn")
-	patrickText.text = "Welcome to my shop, my name is Patrik. Here you can buy stuff 
-to defeat those nasty monsters. This is the cheapest shop you 
-can find so dont try to negotiate the price Arne!"
+	patrickText.text = "Welcome to my shop, my name is Patrik. 
+Here you can buy stuff to defeat those nasty 
+monsters. This is the cheapest shop you can find so 
+dont try to negotiate the price Arne!"
 	
 func close_shop():
 	animations.play("TransformOut")
@@ -55,7 +56,7 @@ func _on_buy_speed_button_pressed():
 		global.speedPrice *= 2
 		speedPriceLabel.text = str(global.speedPrice)
 		goldAmount.text = ": " + str(global.gold)
-		patrickText.text = "Nice! you are fast man!"
+		patrickText.text = "Nice! you now have " + str(global.speed) + " speed"
 	else:
 		taunt()
 
@@ -67,7 +68,7 @@ func _on_buy_health_button_pressed():
 		global.healthPrice *= 2
 		healthPriceLabel.text = str(global.healthPrice)
 		goldAmount.text = ": " + str(global.gold)
-		patrickText.text = "Nice! health increased"
+		patrickText.text = "Nice! you now have " + str(global.health) + " health"
 	else:
 		taunt()
 
@@ -78,7 +79,7 @@ func _on_buy_attack_button_pressed():
 		global.attackPrice *= 2
 		attackPriceLabel.text = str(global.attackPrice)
 		goldAmount.text = ": " + str(global.gold)
-		patrickText.text = "Nice! your sword is now better Arn the temple man"
+		patrickText.text = "Nice! you now have " + str(global.templarDamage) + " attack"
 	else:
 		taunt()
 		

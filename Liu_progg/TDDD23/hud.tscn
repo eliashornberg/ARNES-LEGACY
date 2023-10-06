@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dygc6hvpoqsr1"]
+[gd_scene load_steps=24 format=3 uid="uid://dygc6hvpoqsr1"]
 
 [ext_resource type="Script" path="res://hud.gd" id="1_me20i"]
 [ext_resource type="FontFile" uid="uid://b1fcjres08u3w" path="res://Chomsky.otf" id="1_nonwh"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dbwp1f2tg4xw1" path="res://Item 3-1.png.png" id="4_6tmju"]
 [ext_resource type="Texture2D" uid="uid://emv81im1ogge" path="res://art/Jordans/Jordan 1 High Dior.png" id="5_3lbn7"]
 [ext_resource type="Texture2D" uid="uid://d4goplhmfbp2g" path="res://Unicorn's Evolving Swords_00.png" id="5_86fcq"]
+[ext_resource type="FontFile" uid="uid://1ma37e7h1np6" path="res://art/NinjaAdventure/HUD/Font/NormalFont.ttf" id="5_imll5"]
 [ext_resource type="Texture2D" uid="uid://citssu76cp26g" path="res://art/Gerald's Keys/Keys/Space-Key.png" id="5_xy7me"]
 [ext_resource type="Texture2D" uid="uid://cys3a3any82fb" path="res://art/Gerald's Keys/Keys/O-Key.png" id="8_034p4"]
 
@@ -232,7 +233,7 @@ grow_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_nonwh")
 theme_override_font_sizes/font_size = 64
-text = "200 "
+text = "150 "
 vertical_alignment = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Speed"]
@@ -308,5 +309,19 @@ position = Vector2(34.5, 44.5)
 scale = Vector2(2.40625, 2.59375)
 texture = ExtResource("8_034p4")
 hframes = 2
+
+[node name="ShopNotOpen" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -753.0
+offset_top = 137.0
+offset_right = 754.0
+offset_bottom = 247.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_imll5")
+theme_override_font_sizes/font_size = 80
+text = "SHOP IS CLOSED DURING WAVES!"
 
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

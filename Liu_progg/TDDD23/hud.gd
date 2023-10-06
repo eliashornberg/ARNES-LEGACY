@@ -3,6 +3,7 @@ extends CanvasLayer
 signal start_game
 
 func _ready():
+	$ShopNotOpen.hide()
 	$Instruction/sword.play("default")
 	$Instruction/O_key.play("press")
 

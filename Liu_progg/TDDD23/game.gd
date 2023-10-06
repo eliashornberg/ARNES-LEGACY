@@ -78,7 +78,11 @@ func start_wave():
 	global.enemies = 0
 	$HUD.update_wave()
 	if global.wave % 5 != 0:
-		$Spawn_timer.wait_time = spawn_freq/global.wave
+		if not spawn_freq/global.wave < 1:
+			$Spawn_timer.wait_time = spawn_freq/global.wave
+		else:
+			$Spawn_timer.wait_time = 1
+		print($Spawn_timer.wait_time)
 		$goblinSpawnTimer.wait_time = goblin_spawn_freq/global.wave
 		spawn_timer = true
 		spawn_goblin_timer = true
@@ -134,11 +138,17 @@ func _on_bateman_area_2d_body_entered(body):
 		global.justEnteredBatemanHouse = true
 		if not global.justEnteredWorld and not wave_active:
 			get_tree().change_scene_to_file("res://bateman_house.tscn")
+		else:
+			if not global.justEnteredWorld and wave_active:
+				$HUD/ShopNotOpen.show()
 
 
 func _on_bateman_area_2d_body_exited(body):
 	if body.is_in_group("hero"):
+		if not global.justEnteredWorld:
+			$HUD/ShopNotOpen.hide()
 		global.justEnteredWorld = false
+		
 
 
 func _on_wave_timer_timeout():

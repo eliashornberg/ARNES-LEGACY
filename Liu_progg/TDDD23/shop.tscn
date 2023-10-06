@@ -235,10 +235,10 @@ scale = Vector2(1.6875, 1.28125)
 sprite_frames = SubResource("SpriteFrames_t8j6i")
 
 [node name="GoldAmount" type="Label" parent="."]
-offset_left = 456.0
-offset_top = 256.0
-offset_right = 569.0
-offset_bottom = 304.0
+offset_left = 458.0
+offset_top = 286.0
+offset_right = 571.0
+offset_bottom = 334.0
 theme_override_font_sizes/font_size = 32
 text = ": 0"
 
@@ -249,13 +249,14 @@ sprite_frames = SubResource("SpriteFrames_g53qr")
 
 [node name="PatrikDialogue" type="Label" parent="."]
 offset_left = 156.0
-offset_top = 113.0
-offset_right = 775.0
-offset_bottom = 219.0
-theme_override_font_sizes/font_size = 20
-text = "Welcome to my shop, my name is Patrik. Here you can buy stuff 
-to defeat those nasty monsters. This is the cheapest shop you 
-can find so dont try to negotiate the price Arne!"
+offset_top = 111.0
+offset_right = 770.0
+offset_bottom = 259.0
+theme_override_font_sizes/font_size = 24
+text = "Welcome to my shop, my name is Patrik. 
+Here you can buy stuff to defeat those nasty 
+monsters. This is the cheapest shop you can find so 
+dont try to negotiate the price Arne!"
 
 [node name="healthText" type="Label" parent="."]
 offset_left = 598.0
