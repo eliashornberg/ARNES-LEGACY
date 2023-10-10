@@ -20,6 +20,6 @@ var speedPrice = 100
 var attackPrice = 100
 var healthPrice = 50
 
-var speedOffer = 40
+var speedOffer = 20
 var attackOffer = 20
 var healthOffer = 40
