@@ -36,64 +36,65 @@ func _process(delta):
 		var looking_down = true
 		if Input.is_action_pressed("StartWave") and not global.game_started:
 			global.game_started = true
-		if Input.is_action_pressed("down"):
-			velocity.y += 1
-			moving = true
-			looking_up = false
-			looking_right = false
-			looking_down = true
-			change_position = true
-			_state_machine.travel("run-down")
-		if Input.is_action_pressed("up"):
-			velocity.y -= 1
-			moving = true
-			looking_up = true
-			looking_right = false
-			looking_down = false
-			change_position = true
-			_state_machine.travel("run-up")
-		if Input.is_action_pressed("right"):
-			velocity.x += 1
-			looking_right = true
-			looking_up = false
-			looking_down = false
-			moving = true
-			change_position = true
-			_state_machine.travel("run-sword")
-		if Input.is_action_pressed("left"):
-			velocity.x -= 1
-			looking_right = false
-			looking_up = false
-			looking_down = false
-			moving = true
-			change_position = true
-			_state_machine.travel("run-left")
-		if Input.is_action_pressed("attack"):
-			moving = true
-			if looking_right:
-				_state_machine.travel("attack-right")
-			else:
-				if looking_up:
-					_state_machine.travel("attack-up")
+		if not hit_taken:
+			if Input.is_action_pressed("down"):
+				velocity.y += 1
+				moving = true
+				looking_up = false
+				looking_right = false
+				looking_down = true
+				change_position = true
+				_state_machine.travel("run-down")
+			if Input.is_action_pressed("up"):
+				velocity.y -= 1
+				moving = true
+				looking_up = true
+				looking_right = false
+				looking_down = false
+				change_position = true
+				_state_machine.travel("run-up")
+			if Input.is_action_pressed("right"):
+				velocity.x += 1
+				looking_right = true
+				looking_up = false
+				looking_down = false
+				moving = true
+				change_position = true
+				_state_machine.travel("run-sword")
+			if Input.is_action_pressed("left"):
+				velocity.x -= 1
+				looking_right = false
+				looking_up = false
+				looking_down = false
+				moving = true
+				change_position = true
+				_state_machine.travel("run-left")
+			if Input.is_action_pressed("attack"):
+				moving = true
+				if looking_right:
+					_state_machine.travel("attack-right")
 				else:
-					if looking_down:
-						_state_machine.travel("attack-down")
+					if looking_up:
+						_state_machine.travel("attack-up")
 					else:
-						_state_machine.travel("attack-left")
-		if Input.is_action_pressed("roll"):
-			moving = true
-			if looking_right:
-				_state_machine.travel("roll-right")
-			else:
-				$Sprite2D.flip_h = true
-				_state_machine.travel("roll-right")
-		if Input.is_action_pressed("thanos"):
-			moving = true
-			if looking_right:
-				_state_machine.travel("thanos-snapped")
-			else:
-				$Sprite2D.flip_h = true
-				_state_machine.travel("thanos-snapped")
+						if looking_down:
+							_state_machine.travel("attack-down")
+						else:
+							_state_machine.travel("attack-left")
+			if Input.is_action_pressed("roll"):
+				moving = true
+				if looking_right:
+					_state_machine.travel("roll-right")
+				else:
+					$Sprite2D.flip_h = true
+					_state_machine.travel("roll-right")
+			if Input.is_action_pressed("thanos"):
+				moving = true
+				if looking_right:
+					_state_machine.travel("thanos-snapped")
+				else:
+					$Sprite2D.flip_h = true
+					_state_machine.travel("thanos-snapped")
 		if hit_taken:
 			moving = true
 			hit_taken = false
@@ -117,6 +118,10 @@ func _process(delta):
 			position += velocity * delta
 			position = position.clamp(Vector2.ZERO, screen_size)
 			move_and_collide(velocity*delta)
+	
+	else:
+		if _state_machine.get_current_node() != "End" and _state_machine.get_current_node() != "die-ground":
+			_state_machine.travel("die-ground")
 		
 func enemy_attack(damage):
 	hit_taken = true
